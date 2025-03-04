@@ -7,7 +7,7 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { WagmiProvider, http } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Layout from "./components/Layout";
+import Layout from "./layout";
 import { config } from "./config";
 
 const queryClient = new QueryClient();

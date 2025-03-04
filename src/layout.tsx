@@ -1,8 +1,8 @@
 "use client";
 
 import { useAccount } from "wagmi";
-import WelcomeScreen from "../WelcomeScreen";
-import DefiScreen from "../StrategyBoard";
+import WelcomeScreen from "./components/WelcomeScreen";
+import DefiScreen from "./components/StrategyBoard";
 import { useState } from "react";
 
 export default function Layout() {

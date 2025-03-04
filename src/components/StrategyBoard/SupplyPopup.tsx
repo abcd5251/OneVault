@@ -15,7 +15,7 @@ import {
   PERMIT_EXPIRY,
   TYPES,
 } from "../../helpers/constants";
-import CurrencyInput from "../CurrencyInput";
+import CurrencyInput from "../ui/CurrencyInput";
 import { config } from "../../config";
 import { usdcAbi } from "../../abis/usdc";
 import { execution } from "../../helpers/mock-backend";

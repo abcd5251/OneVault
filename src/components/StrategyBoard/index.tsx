@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import CustomRainbowKitConnectButton from "../CustomConnectButton";
+import CustomRainbowKitConnectButton from "../ui/CustomConnectButton";
 import StrategyPopup from "./StrategyPopup";
 import ChatBox from "./ChatBox";
 import StakeScreen from "./SupplyPopup";
