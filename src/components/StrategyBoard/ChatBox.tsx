@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-
+import { useState, useRef, useEffect } from 'react';
 interface Message {
   text: string;
   isUser: boolean;
@@ -18,12 +17,12 @@ export default function ChatBox({
   setShowPopup,
 }: ChatBoxProps) {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -37,10 +36,10 @@ export default function ChatBox({
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/defiInfo", {
-        method: "POST",
+      const response = await fetch('http://localhost:8000/defiInfo', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ input_text: inputText }),
       });
@@ -48,23 +47,23 @@ export default function ChatBox({
       const data = await response.json();
       setMessages((prev) => [...prev, { text: data.result, isUser: false }]);
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
     } finally {
       setIsLoading(false);
     }
 
-    setInputText("");
+    setInputText('');
   };
   const handleBackClick = () => {
     setShowChatBox(false);
     setShowPopup(true);
     setMessages([]);
-    setInputText("");
+    setInputText('');
   };
   const handleCancelClick = () => {
     setShowChatBox(false);
     setMessages([]);
-    setInputText("");
+    setInputText('');
   };
 
   if (!isOpen) return null;
@@ -111,34 +110,30 @@ export default function ChatBox({
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
                     onClick={() =>
                       setInputText("How does Morpho's lending work?")
-                    }
-                  >
-                    How does Morpho's lending work?
+                    }>
+                    How does Morpho&apos;s lending work?
                   </button>
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
                     onClick={() =>
                       setInputText(
-                        "What makes the Gauntlet WETH Prime Vault different?"
+                        'What makes the Gauntlet WETH Prime Vault different?',
                       )
-                    }
-                  >
+                    }>
                     What makes the Gauntlet WETH Prime Vault different?
                   </button>
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
                     onClick={() =>
-                      setInputText("How is the 3.72% APY calculated?")
-                    }
-                  >
+                      setInputText('How is the 3.72% APY calculated?')
+                    }>
                     How is the 3.72% APY calculated?
                   </button>
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
                     onClick={() =>
-                      setInputText("What risks should I be aware of?")
-                    }
-                  >
+                      setInputText('What risks should I be aware of?')
+                    }>
                     What risks should I be aware of?
                   </button>
                 </div>
@@ -149,16 +144,14 @@ export default function ChatBox({
                   <div
                     key={index}
                     className={`mb-4 ${
-                      message.isUser ? "text-right" : "text-left"
-                    }`}
-                  >
+                      message.isUser ? 'text-right' : 'text-left'
+                    }`}>
                     <div
                       className={`inline-block p-3 rounded-lg ${
                         message.isUser
-                          ? "bg-blue-400 text-white"
-                          : "bg-white text-black"
-                      }`}
-                    >
+                          ? 'bg-blue-400 text-white'
+                          : 'bg-white text-black'
+                      }`}>
                       {message.text}
                     </div>
                   </div>
@@ -168,16 +161,13 @@ export default function ChatBox({
                     <div className="bg-white px-4 py-2 rounded-lg flex items-center space-x-2">
                       <div
                         className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"
-                        style={{ animationDelay: "0ms" }}
-                      ></div>
+                        style={{ animationDelay: '0ms' }}></div>
                       <div
                         className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"
-                        style={{ animationDelay: "200ms" }}
-                      ></div>
+                        style={{ animationDelay: '200ms' }}></div>
                       <div
                         className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"
-                        style={{ animationDelay: "400ms" }}
-                      ></div>
+                        style={{ animationDelay: '400ms' }}></div>
                     </div>
                   </div>
                 )}
@@ -192,7 +182,7 @@ export default function ChatBox({
                   type="text"
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
-                  onKeyPress={(e) => e.key === "Enter" && handleSubmit()}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
                   placeholder="Ask anything.."
                   className="bg-gray-800 flex-1 text-white px-4 py-2 rounded-lg outline-none"
                 />

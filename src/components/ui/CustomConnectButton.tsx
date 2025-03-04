@@ -1,5 +1,5 @@
-import { WalletIcon } from "@heroicons/react/24/outline";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { WalletIcon } from '@heroicons/react/24/outline';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 export default function CustomRainbowKitConnectButton() {
   return (
@@ -20,14 +20,13 @@ export default function CustomRainbowKitConnectButton() {
         return (
           <div
             {...(!ready && {
-              "aria-hidden": true,
+              'aria-hidden': true,
               style: {
                 opacity: 0,
-                pointerEvents: "none",
-                userSelect: "none",
+                pointerEvents: 'none',
+                userSelect: 'none',
               },
-            })}
-          >
+            })}>
             {(() => {
               if (!connected) {
                 return (
@@ -36,11 +35,10 @@ export default function CustomRainbowKitConnectButton() {
                     onClick={openConnectModal}
                     type="button"
                     style={{
-                      textShadow: " -1px 2px 0px #000000",
-                      WebkitTextFillColor: "white",
-                      WebkitTextStroke: "0.2px black",
-                    }}
-                  >
+                      textShadow: ' -1px 2px 0px #000000',
+                      WebkitTextFillColor: 'white',
+                      WebkitTextStroke: '0.2px black',
+                    }}>
                     Connect Wallet
                   </button>
                 );
@@ -53,13 +51,12 @@ export default function CustomRainbowKitConnectButton() {
                 );
               }
               return (
-                <div className="ml-6" style={{ display: "flex" }}>
+                <div className="ml-6" style={{ display: 'flex' }}>
                   <button
                     className="cursor-pointer flex items-center text-2xl bg-background-gray text-white parallelogram border border-solid border-black uppercase px-4 py-3 shadow-[0_4px_0_0_rgba(0,0,0,1)]"
                     onClick={openChainModal}
-                    style={{ display: "flex", alignItems: "center" }}
-                    type="button"
-                  >
+                    style={{ display: 'flex', alignItems: 'center' }}
+                    type="button">
                     {chain.iconUrl ? (
                       <img
                         alt={chain.name}
@@ -75,16 +72,15 @@ export default function CustomRainbowKitConnectButton() {
                     onClick={openAccountModal}
                     type="button"
                     style={{
-                      textShadow: "-1px 2px 0px #000000",
-                      WebkitTextFillColor: "white",
-                      WebkitTextStroke: "1px black",
-                    }}
-                  >
+                      textShadow: '-1px 2px 0px #000000',
+                      WebkitTextFillColor: 'white',
+                      WebkitTextStroke: '1px black',
+                    }}>
                     <WalletIcon className="size-6 mr-2" />
                     <span>
-                      {" "}
+                      {' '}
                       {account.address.slice(0, 6) +
-                        "..." +
+                        '...' +
                         account.address.slice(-4)}
                     </span>
                   </button>

@@ -4,20 +4,18 @@ export function HighRisk() {
       <div
         onClick={() => {
           // TODO
-          console.log("High-Risk Strategy");
+          console.log('High-Risk Strategy');
         }}
-        className="text-right text-[#7583A4] bg-black"
-      >
+        className="text-right text-[#7583A4] bg-black">
         <p>High-Risk Strategy</p>
       </div>
       <div
         style={{
-          textShadow: " -1.5px 1px 0px #000000",
-          WebkitTextFillColor: "white",
-          WebkitTextStroke: "1.2px black",
+          textShadow: ' -1.5px 1px 0px #000000',
+          WebkitTextFillColor: 'white',
+          WebkitTextStroke: '1.2px black',
         }}
-        className="bg-[#E53B52] text-white pl-3"
-      >
+        className="bg-[#E53B52] text-white pl-3">
         <div className="flex items-center py-2">
           <div className="text-5xl mr-3">🚀</div>
           <div>

@@ -1,24 +1,24 @@
-import { encodeFunctionData, toHex } from "viem";
-import type { Address, Hex } from "viem";
-import { readContract } from "@wagmi/core";
+import { encodeFunctionData, toHex } from 'viem';
+import type { Address, Hex } from 'viem';
+import { readContract } from '@wagmi/core';
 
-import type { Call } from "./mock-backend";
+import type { Call } from './mock-backend';
 
-import { usdcAbi } from "../abis/usdc";
+import { usdcAbi } from '../abis/usdc';
 import {
   EXECUTOR,
   MORPHO_BLUE,
   MORPHO_WETH_USDC_MARKET,
   USDC,
-} from "./constants";
-import { morphoAbi } from "../abis/morpho";
-import { config } from "../config";
+} from './constants';
+import { morphoAbi } from '../abis/morpho';
+import { config } from '../config';
 
 export async function createMorphoCall(
   user: Address,
   amount: bigint,
   deadline: bigint,
-  signature: Hex
+  signature: Hex,
 ) {
   const calls: Call[] = [];
 
@@ -26,7 +26,7 @@ export async function createMorphoCall(
   {
     const data = encodeFunctionData({
       abi: usdcAbi,
-      functionName: "permit",
+      functionName: 'permit',
       args: [user, EXECUTOR, amount, deadline, signature],
     });
     calls.push({
@@ -39,7 +39,7 @@ export async function createMorphoCall(
   {
     const data = encodeFunctionData({
       abi: usdcAbi,
-      functionName: "transferFrom",
+      functionName: 'transferFrom',
       args: [user, EXECUTOR, amount],
     });
     calls.push({
@@ -52,7 +52,7 @@ export async function createMorphoCall(
   {
     const data = encodeFunctionData({
       abi: usdcAbi,
-      functionName: "approve",
+      functionName: 'approve',
       args: [MORPHO_BLUE, amount],
     });
     calls.push({
@@ -67,8 +67,8 @@ export async function createMorphoCall(
 
     const data = encodeFunctionData({
       abi: morphoAbi,
-      functionName: "supply",
-      args: [marketParams, amount, BigInt(0), user, toHex("")],
+      functionName: 'supply',
+      args: [marketParams, amount, BigInt(0), user, toHex('')],
     });
     calls.push({
       target: MORPHO_BLUE,
@@ -85,9 +85,9 @@ async function getMarketParams(marketId: Hex) {
     {
       abi: morphoAbi,
       address: MORPHO_BLUE,
-      functionName: "idToMarketParams",
+      functionName: 'idToMarketParams',
       args: [marketId],
-    }
+    },
   );
 
   return {
