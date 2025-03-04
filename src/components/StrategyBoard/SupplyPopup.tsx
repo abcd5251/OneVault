@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { baseSepolia } from "wagmi/chains";
-import { useAccount, useReadContract } from "wagmi";
+import { useAccount } from "wagmi";
 import {
   waitForTransactionReceipt,
   signTypedData,
@@ -30,14 +29,13 @@ interface DepositFormData {
   };
 }
 
-interface StakeScreenProps {
+interface SupplyPopupProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function StakeScreen({ isOpen, onClose }: StakeScreenProps) {
+export default function SupplyPopup({ isOpen, onClose }: SupplyPopupProps) {
   const { control, handleSubmit } = useForm<DepositFormData>();
-  const [inputValue, setinputValue] = useState(0);
   const { address } = useAccount();
 
   async function onSubmit(data: DepositFormData) {
@@ -73,8 +71,6 @@ export default function StakeScreen({ isOpen, onClose }: StakeScreenProps) {
     const calls = await createMorphoCall(address!, amount, deadline, signature);
     const tx = await execution(address!, calls);
 
-    console.log("Tx done");
-    console.log("Call tx", tx);
     toast.promise(
       waitForTransactionReceipt(config, {
         hash: tx,
