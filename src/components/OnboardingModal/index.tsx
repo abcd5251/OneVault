@@ -17,8 +17,8 @@ import {
 } from "@wagmi/core";
 import { ToastContainer, toast } from "react-toastify";
 
-import CustomRainbowKitConnectButton from "../CustomConnectButton";
-import CurrencyInput from "../CurrencyInput";
+import CustomRainbowKitConnectButton from "../ui/CustomConnectButton";
+import CurrencyInput from "../ui/CurrencyInput";
 import { usdcAbi } from "../../abis/usdc";
 import { config } from "../../config";
 import {
