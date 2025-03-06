@@ -1,9 +1,8 @@
-"use client";
+import { useAccount } from 'wagmi';
+import WelcomeScreen from './components/WelcomeScreen';
+import DefiScreen from './components/StrategyBoard';
 
-import { useAccount } from "wagmi";
-import WelcomeScreen from "./components/WelcomeScreen";
-import DefiScreen from "./components/StrategyBoard";
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Layout() {
   const [isDeposited, setIsDeposited] = useState(true); //! mock TRUE

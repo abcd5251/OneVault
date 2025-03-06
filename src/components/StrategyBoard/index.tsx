@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import CustomRainbowKitConnectButton from "../ui/CustomConnectButton";
-import StrategyPopup from "./StrategyPopup";
-import ChatBox from "./ChatBox";
-import StakeScreen from "./SupplyPopup";
-import NewsPopup from "./NewsPopup";
+import CustomRainbowKitConnectButton from '../ui/CustomConnectButton';
+import StrategyPopup from './StrategyPopup';
+import ChatBox from './ChatBox';
+import StakeScreen from './SupplyPopup';
+import NewsPopup from './NewsPopup';
 
-import { MidRisk, LowRisk, HighRisk } from "../strategies";
+import { MidRisk, LowRisk, HighRisk } from '../strategies';
 
 export default function StrategyBoard() {
   const [showPopup, setShowPopup] = useState(false);
@@ -27,21 +27,18 @@ export default function StrategyBoard() {
       {/* CONTENT */}
       <div className="relative flex items-center justify-center h-full flex-col">
         <div
-          style={{ backgroundColor: "rgba(10, 26, 107, 0.5)" }}
-          className="w-[95vw] pl-3 mx-3 parallelogram relative pb-3"
-        >
+          style={{ backgroundColor: 'rgba(10, 26, 107, 0.5)' }}
+          className="w-[95vw] pl-3 mx-3 parallelogram relative pb-3">
           <div
-            style={{ backgroundColor: "rgba(10, 26, 107, 0.74)" }}
-            className="relative pl-3"
-          >
+            style={{ backgroundColor: 'rgba(10, 26, 107, 0.74)' }}
+            className="relative pl-3">
             <h2
               style={{
-                textShadow: "-5px 3px 0px #000000",
-                WebkitTextFillColor: "white",
-                WebkitTextStroke: "2px black",
+                textShadow: '-5px 3px 0px #000000',
+                WebkitTextFillColor: 'white',
+                WebkitTextStroke: '2px black',
               }}
-              className="text-white text-4xl uppercase text-center tracking-tighter py-1"
-            >
+              className="text-white text-4xl uppercase text-center tracking-tighter py-1">
               Command Center
             </h2>
           </div>
@@ -62,11 +59,10 @@ export default function StrategyBoard() {
           <button
             onClick={() => {
               // TODO: Handle rewards click
-              console.log("Rewards clicked");
+              console.log('Rewards clicked');
             }}
             type="button"
-            className="focus:outline-none"
-          >
+            className="focus:outline-none">
             <img
               src="/btn-rewards.svg"
               className="h-24 w-auto object-contain hover:scale-105 transition-all duration-300"
@@ -77,11 +73,10 @@ export default function StrategyBoard() {
           <button
             onClick={() => {
               // TODO: Handle quests click
-              console.log("Quests clicked");
+              console.log('Quests clicked');
             }}
             type="button"
-            className="focus:outline-none"
-          >
+            className="focus:outline-none">
             <img
               src="/btn-quests.svg"
               className="h-24 w-auto object-contain hover:scale-105 transition-all duration-300"
@@ -92,11 +87,10 @@ export default function StrategyBoard() {
           <button
             onClick={() => {
               // TODO: Handle history click
-              console.log("History clicked");
+              console.log('History clicked');
             }}
             type="button"
-            className="focus:outline-none"
-          >
+            className="focus:outline-none">
             <img
               src="/btn-history.svg"
               className="h-24 w-auto object-contain hover:scale-105 transition-all duration-300"
@@ -108,11 +102,10 @@ export default function StrategyBoard() {
           <button
             onClick={() => {
               setShowNews(true);
-              console.log("News clicked");
+              console.log('News clicked');
             }}
             type="button"
-            className="focus:outline-none"
-          >
+            className="focus:outline-none">
             <img
               src="/btn-news.svg"
               className="h-24 w-auto object-contain hover:scale-105 transition-all duration-300"
@@ -123,11 +116,10 @@ export default function StrategyBoard() {
           <button
             onClick={() => {
               setShowChatBox(true);
-              console.log("AI Chat clicked");
+              console.log('AI Chat clicked');
             }}
             type="button"
-            className="focus:outline-none"
-          >
+            className="focus:outline-none">
             <img
               src="/btn-ai-chat.svg"
               className="h-20 w-auto object-contain hover:scale-105 transition-all duration-300"

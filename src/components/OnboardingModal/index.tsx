@@ -1,35 +1,35 @@
-"use client";
+'use client';
 
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
-} from "@headlessui/react";
-import { useAccount } from "wagmi";
-import { baseSepolia } from "wagmi/chains";
-import { useForm, Controller } from "react-hook-form";
+} from '@headlessui/react';
+import { useAccount } from 'wagmi';
+import { baseSepolia } from 'wagmi/chains';
+import { useForm, Controller } from 'react-hook-form';
 import {
   waitForTransactionReceipt,
   signTypedData,
   readContract,
-} from "@wagmi/core";
-import { ToastContainer, toast } from "react-toastify";
+} from '@wagmi/core';
+import { ToastContainer, toast } from 'react-toastify';
 
-import CustomRainbowKitConnectButton from "../ui/CustomConnectButton";
-import CurrencyInput from "../ui/CurrencyInput";
-import { usdcAbi } from "../../abis/usdc";
-import { config } from "../../config";
+import CustomRainbowKitConnectButton from '../ui/CustomConnectButton';
+import CurrencyInput from '../ui/CurrencyInput';
+import { usdcAbi } from '../../abis/usdc';
+import { config } from '../../config';
 import {
   USDC,
   VAULT,
   USDC_DECIMAL,
   PERMIT_EXPIRY,
   TYPES,
-} from "../../helpers/constants";
-import { serializeAmount } from "../../helpers/utils";
-import { deposit } from "../../helpers/mock-backend";
+} from '../../helpers/constants';
+import { serializeAmount } from '../../helpers/utils';
+import { deposit } from '../../helpers/mock-backend';
 
 interface DepositFormData {
   deposit: {
@@ -53,7 +53,7 @@ export default function OnboardingModal({
   const { control, handleSubmit } = useForm<DepositFormData>();
 
   async function onSubmit(data: DepositFormData) {
-    console.log("Form submitted with values:", data);
+    console.log('Form submitted with values:', data);
 
     const timestampInSeconds = Math.floor(Date.now() / 1000);
     const deadline = BigInt(timestampInSeconds) + BigInt(PERMIT_EXPIRY);
@@ -62,19 +62,19 @@ export default function OnboardingModal({
     const nonce = await readContract(config, {
       abi: usdcAbi,
       address: USDC,
-      functionName: "nonces",
+      functionName: 'nonces',
       args: [address!],
     });
 
     const signature = await signTypedData(config, {
       domain: {
-        name: "USDC",
+        name: 'USDC',
         chainId: baseSepolia.id,
         verifyingContract: USDC,
-        version: "2",
+        version: '2',
       },
       types: TYPES,
-      primaryType: "Permit",
+      primaryType: 'Permit',
       message: {
         owner: address!,
         spender: VAULT,
@@ -90,10 +90,10 @@ export default function OnboardingModal({
         hash: tx,
       }),
       {
-        pending: "Transaction is pending...",
+        pending: 'Transaction is pending...',
         success: `Transaction confirmed ! \n Tx hash: ${tx}`,
-        error: "Transaction failed",
-      }
+        error: 'Transaction failed',
+      },
     );
 
     await delay();
@@ -105,8 +105,7 @@ export default function OnboardingModal({
     <Dialog
       open={openModal}
       onClose={setOpenModal}
-      className="relative z-10 overflow-visible"
-    >
+      className="relative z-10 overflow-visible">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in overflow-visible"
@@ -116,18 +115,16 @@ export default function OnboardingModal({
         <div className="flex sm:min-h-full justify-center p-4 text-center sm:items-center sm:p-0 overflow-visible">
           <DialogPanel
             transition
-            className="sm:min-w-[55vw] relative transform overflow-visible bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-          >
+            className="sm:min-w-[55vw] relative transform overflow-visible bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95">
             <div className="bg-background-light-blue text-center relative py-2 overflow-visible">
               <DialogTitle
                 as="h2"
                 style={{
-                  textShadow: " -1px 2px 0px #000000",
-                  WebkitTextFillColor: "white",
-                  WebkitTextStroke: "0.2px black",
+                  textShadow: '-1px 2px 0px #000000',
+                  WebkitTextFillColor: 'white',
+                  WebkitTextStroke: '0.2px black',
                 }}
-                className="text-3xl uppercase font-semibold text-gray-900"
-              >
+                className="text-3xl uppercase font-semibold text-gray-900">
                 Getting Started
               </DialogTitle>
 
@@ -135,8 +132,7 @@ export default function OnboardingModal({
                 <button
                   type="button"
                   onClick={() => setOpenModal(false)}
-                  className="border border-black z-50 parallelogram bg-red-700 px-3 py-1 text-white hover:bg-red-800 transition-colors shadow-[0_4px_0_0_rgba(0,0,0,1)]"
-                >
+                  className="border border-black z-50 parallelogram bg-red-700 px-3 py-1 text-white hover:bg-red-800 transition-colors shadow-[0_4px_0_0_rgba(0,0,0,1)]">
                   <span className="sr-only">Close</span>
                   <img
                     src="/icon-cancel.png"
@@ -161,11 +157,10 @@ export default function OnboardingModal({
                       <p
                         className="text-2xl"
                         style={{
-                          textShadow: " -1px 2px 0px #000000",
-                          WebkitTextFillColor: "white",
-                          WebkitTextStroke: "0.5px black",
-                        }}
-                      >
+                          textShadow: ' -1px 2px 0px #000000',
+                          WebkitTextFillColor: 'white',
+                          WebkitTextStroke: '0.5px black',
+                        }}>
                         Deposit Funds to Activate Your AI Strategist
                       </p>
                       <p className="mt-5">
@@ -187,44 +182,42 @@ export default function OnboardingModal({
                       <p
                         className="text-2xl"
                         style={{
-                          textShadow: " -1px 2px 0px #000000",
-                          WebkitTextFillColor: "white",
-                          WebkitTextStroke: "0.5px black",
-                        }}
-                      >
+                          textShadow: ' -1px 2px 0px #000000',
+                          WebkitTextFillColor: 'white',
+                          WebkitTextStroke: '0.5px black',
+                        }}>
                         Choose Deposit Amount
                       </p>
                       <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="w-full flex flex-col gap-y-3"
-                      >
+                        className="w-full flex flex-col gap-y-3">
                         <Controller
                           name="deposit"
                           control={control}
                           rules={{
-                            required: "Please enter an amount",
+                            required: 'Please enter an amount',
                             validate: {
                               positive: (value) =>
                                 parseFloat(value.amount) > 0 ||
-                                "Amount must be greater than 0",
+                                'Amount must be greater than 0',
                             },
                           }}
                           render={({ field }) => <CurrencyInput {...field} />}
                         />
                         <p className="text-sm mt-2">
-                          ⚡ If your deposit covers the required gas, you're
-                          good to go! Otherwise, we'll remind you to top up.
+                          ⚡ If your deposit covers the required gas,
+                          you&apos;re good to go! Otherwise, we&apos;ll remind
+                          you to top up.
                         </p>
                         <div className="self-center max-sm:mt-auto mt-5">
                           <button
                             type="submit"
                             className="uppercase shadow-[0_4px_0_0_rgba(0,0,0,1)] text-3xl px-12 py-3 parallelogram bg-background-yellow text-white border-2 border-black hover:scale-105 transition-all duration-300"
                             style={{
-                              textShadow: " -1px 3px 0px #000000",
-                              WebkitTextFillColor: "white",
-                              WebkitTextStroke: "0.2px black",
-                            }}
-                          >
+                              textShadow: ' -1px 3px 0px #000000',
+                              WebkitTextFillColor: 'white',
+                              WebkitTextStroke: '0.2px black',
+                            }}>
                             <span>Deposit</span>
                           </button>
                         </div>

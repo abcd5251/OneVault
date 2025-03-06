@@ -1,12 +1,12 @@
-import { useForm, Controller } from "react-hook-form";
-import { baseSepolia } from "wagmi/chains";
-import { useAccount } from "wagmi";
+import { useForm, Controller } from 'react-hook-form';
+import { baseSepolia } from 'wagmi/chains';
+import { useAccount } from 'wagmi';
 import {
   waitForTransactionReceipt,
   signTypedData,
   readContract,
-} from "@wagmi/core";
-import { ToastContainer, toast } from "react-toastify";
+} from '@wagmi/core';
+import { ToastContainer, toast } from 'react-toastify';
 
 import {
   EXECUTOR,
@@ -14,13 +14,13 @@ import {
   USDC_DECIMAL,
   PERMIT_EXPIRY,
   TYPES,
-} from "../../helpers/constants";
-import CurrencyInput from "../ui/CurrencyInput";
-import { config } from "../../config";
-import { usdcAbi } from "../../abis/usdc";
-import { execution } from "../../helpers/mock-backend";
-import { createMorphoCall } from "../../helpers/strategy";
-import { serializeAmount } from "../../helpers/utils";
+} from '../../helpers/constants';
+import CurrencyInput from '../ui/CurrencyInput';
+import { config } from '../../config';
+import { usdcAbi } from '../../abis/usdc';
+import { execution } from '../../helpers/mock-backend';
+import { createMorphoCall } from '../../helpers/strategy';
+import { serializeAmount } from '../../helpers/utils';
 
 interface DepositFormData {
   deposit: {
@@ -46,19 +46,19 @@ export default function SupplyPopup({ isOpen, onClose }: SupplyPopupProps) {
     const nonce = await readContract(config, {
       abi: usdcAbi,
       address: USDC,
-      functionName: "nonces",
+      functionName: 'nonces',
       args: [address!],
     });
 
     const signature = await signTypedData(config, {
       domain: {
-        name: "USDC",
+        name: 'USDC',
         chainId: baseSepolia.id,
         verifyingContract: USDC,
-        version: "2",
+        version: '2',
       },
       types: TYPES,
-      primaryType: "Permit",
+      primaryType: 'Permit',
       message: {
         owner: address!,
         spender: EXECUTOR,
@@ -76,10 +76,10 @@ export default function SupplyPopup({ isOpen, onClose }: SupplyPopupProps) {
         hash: tx,
       }),
       {
-        pending: "Transaction is pending...",
+        pending: 'Transaction is pending...',
         success: `Transaction confirmed ! \n Tx hash: ${tx}`,
-        error: "Transaction failed",
-      }
+        error: 'Transaction failed',
+      },
     );
   }
 
@@ -109,17 +109,16 @@ export default function SupplyPopup({ isOpen, onClose }: SupplyPopupProps) {
             <img src="/Stake/intro.svg" className="h-10 mt-10" />
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="w-full flex flex-col gap-y-3"
-            >
+              className="w-full flex flex-col gap-y-3">
               <Controller
                 name="deposit"
                 control={control}
                 rules={{
-                  required: "Please enter an amount",
+                  required: 'Please enter an amount',
                   validate: {
                     positive: (value) =>
                       parseFloat(value.amount) > 0 ||
-                      "Amount must be greater than 0",
+                      'Amount must be greater than 0',
                   },
                 }}
                 render={({ field }) => <CurrencyInput {...field} />}

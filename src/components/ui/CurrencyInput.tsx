@@ -1,15 +1,15 @@
-import { useState, forwardRef } from "react";
+import { useState, forwardRef } from 'react';
 import {
   Listbox,
   ListboxOption,
   ListboxOptions,
   ListboxButton,
-} from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+} from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 const currencies = [
-  { id: "usdc", name: "USDC", icon: "/usdc.svg" },
-  { id: "usdt", name: "USDT", icon: "/usdt.svg" },
+  { id: 'usdc', name: 'USDC', icon: '/usdc.svg' },
+  { id: 'usdt', name: 'USDT', icon: '/usdt.svg' },
 ];
 
 interface Props {
@@ -21,7 +21,7 @@ interface Props {
 const CurrencyInput = forwardRef<HTMLInputElement, Props>(
   ({ onChange, value, name }, ref) => {
     const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
-    const [amount, setAmount] = useState("");
+    const [amount, setAmount] = useState('');
 
     const handleAmountChange = (inputValue: string) => {
       setAmount(inputValue);
@@ -59,10 +59,9 @@ const CurrencyInput = forwardRef<HTMLInputElement, Props>(
                   value={currency}
                   className={({ active }) =>
                     `relative cursor-pointer select-none py-2 pl-3 pr-9 ${
-                      active ? "bg-blue-100" : "text-gray-900"
+                      active ? 'bg-blue-100' : 'text-gray-900'
                     }`
-                  }
-                >
+                  }>
                   <div className="flex items-center">
                     <img
                       src={currency.icon}
@@ -90,9 +89,9 @@ const CurrencyInput = forwardRef<HTMLInputElement, Props>(
         />
       </div>
     );
-  }
+  },
 );
 
-CurrencyInput.displayName = "CurrencyInput";
+CurrencyInput.displayName = 'CurrencyInput';
 
 export default CurrencyInput;

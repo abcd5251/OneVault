@@ -1,17 +1,17 @@
 //! Only for dev environment
 
-import type { Address, Hex } from "viem";
-import { createWalletClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { baseSepolia } from "viem/chains";
-import { parseSignature } from "viem";
+import type { Address, Hex } from 'viem';
+import { createWalletClient, http } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
+import { baseSepolia } from 'viem/chains';
+import { parseSignature } from 'viem';
 
-import { executorAbi } from "../abis/executor";
-import { EXECUTOR, VAULT } from "./constants";
-import { vaultAbi } from "../abis/vault";
+import { executorAbi } from '../abis/executor';
+import { EXECUTOR, VAULT } from './constants';
+import { vaultAbi } from '../abis/vault';
 
 const account = privateKeyToAccount(
-  import.meta.env.VITE_ADMIN_PRIVATE_KEY as `0x${string}`
+  import.meta.env.VITE_ADMIN_PRIVATE_KEY as `0x${string}`,
 );
 
 const adminWallet = createWalletClient({
@@ -30,7 +30,7 @@ export async function deposit(
   spender: Address,
   value: bigint,
   deadline: bigint,
-  signature: Hex
+  signature: Hex,
 ) {
   const { v, r, s } = parseSignature(signature);
   const parseV = Number(v);
@@ -38,11 +38,11 @@ export async function deposit(
   const tx = await adminWallet.writeContract({
     abi: vaultAbi,
     address: VAULT,
-    functionName: "deposit",
+    functionName: 'deposit',
     args: [owner, spender, value, deadline, parseV, r, s],
   });
 
-  console.log("Deposit tx", tx);
+  console.log('Deposit tx', tx);
 
   return tx;
 }
@@ -52,11 +52,11 @@ export async function execution(user: Address, calls: Call[]) {
   const tx = await adminWallet.writeContract({
     abi: executorAbi,
     address: EXECUTOR,
-    functionName: "execute",
+    functionName: 'execute',
     args: [calls, user],
   });
 
-  console.log("Execution tx", tx);
+  console.log('Execution tx', tx);
 
   return tx;
 }
