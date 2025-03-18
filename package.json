@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@coinbase/onchainkit": "^0.37.8",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@rainbow-me/rainbowkit": "2.0.1",
