@@ -1,27 +1,23 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import Supply from './Execution';
 
 interface StrategyPopupProps {
   isOpen: boolean;
-  onClose: () => void;
-  setShowAIStrategy: (show: boolean) => void;
+  setChatBox: (show: boolean) => void;
   setShowPopup: (show: boolean) => void;
-  setShowStake: (show: boolean) => void;
 }
 
 export default function StrategyPopup({
   isOpen,
-  onClose,
-  setShowAIStrategy,
+  setChatBox,
   setShowPopup,
-  setShowStake,
 }: StrategyPopupProps) {
   const [showMorpho, setShowMorpho] = useState(false);
+  const [showDepositForm, setShowDepositForm] = useState(false);
+
   const handleAIStrategyClick = () => {
-    setShowAIStrategy(true);
-    setShowPopup(false);
-  };
-  const handleExecuteClick = () => {
-    setShowStake(true);
+    setChatBox(true);
     setShowPopup(false);
   };
 
@@ -29,55 +25,82 @@ export default function StrategyPopup({
 
   return (
     <>
-      <div className="fixed inset-0  flex items-center justify-center z-50">
+      <div className="fixed inset-0 flex items-center justify-center z-50">
         <div className="bg-gray-900/80 absolute t-0 left-0 w-full h-full z-0"></div>
         <div className="bg-[#1E90FF] text-white rounded-lg shadow-lg p-6 w-[90vw] max-w-[600px] z-10 relative">
-          {/* Header */}
-          <div className="flex justify-center items-center border-b border-white pb-2">
-            <div className="items-center">
-              <span className="text-3xl inline-block">🛡️</span>
-              <img src="/morpho/eventInfo.svg" className="h-6 inline-block" />
+          <div className="flex justify-center items-center border-b border-white pb-2 relative -mt-2">
+            {showDepositForm && (
+              <button
+                onClick={() => setShowDepositForm(false)}
+                className="absolute left-0 flex items-center text-white hover:text-blue-200">
+                <svg
+                  className="w-4 h-4 mr-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M15 19l-7-7 7-7"></path>
+                </svg>
+                <span>Back</span>
+              </button>
+            )}
+            <div className="items-center -mb-1 flex ">
+              <span className="text-3xl inline-flex items-center">🛡️</span>
+              <img
+                src="/morpho/eventInfo.svg"
+                className="h-6 ml-1 inline-block align-middle"
+              />
             </div>
             <img
               src="/morpho/cancel.svg"
-              className="h-10 absolute -right-2 top-2 cursor-pointer"
-              onClick={onClose}
+              className="h-10 absolute right-2 -top-2 cursor-pointer"
+              onClick={() => setShowPopup(false)}
             />
           </div>
 
           {/* Body */}
-          <div className="mt-4 relative">
-            <img src="/morpho/Morpho.svg" className="h-10 mb-4 inline-block" />
-            <img
-              src="/morpho/mark.svg"
-              className="h-8 mb-4 ml-2 inline-block cursor-pointer"
-              onClick={() => setShowMorpho(!showMorpho)}
-            />
-            {showMorpho && (
+          {!showDepositForm ? (
+            <div className="mt-4 relative">
               <img
-                src="/morpho/morphoShow.svg"
-                className="absolute -top-48 right-6 "
-              />
-            )}
-            <a href="https://app.morpho.org/vault/?vault=897a21a1-45">
-              <img src="/morpho/intro.svg" className="h-40 " />
-            </a>
-
-            {/* Action Section */}
-            <div className="flex flex-col items-center gap-y-2">
-              <img
-                src="/morpho/AiButton.svg"
-                onClick={handleAIStrategyClick}
-                className="h-16 ml-1.5 cursor-pointer"
+                src="/morpho/Morpho.svg"
+                className="h-10 mb-4 inline-block"
               />
               <img
-                src="/morpho/deposit.svg"
-                onClick={handleExecuteClick}
-                className="h-16 cursor-pointer"
+                src="/morpho/mark.svg"
+                className="h-8 mb-4 ml-2 inline-block cursor-pointer"
+                onClick={() => setShowMorpho(!showMorpho)}
               />
+              {showMorpho && (
+                <img
+                  src="/morpho/morphoShow.svg"
+                  className="absolute -top-48 right-6 "
+                />
+              )}
+              <a>
+                <img src="/morpho/intro.svg" className="h-40 " />
+                <div className="flex flex-col items-center gap-y-2">
+                  <img
+                    src="/morpho/AiButton.svg"
+                    onClick={handleAIStrategyClick}
+                    className="h-16 ml-1.5 cursor-pointer"
+                  />
+                  <img
+                    src="/morpho/deposit.svg"
+                    onClick={() => setShowDepositForm(true)}
+                    className="h-16 cursor-pointer"
+                  />
+                </div>
+              </a>
             </div>
-          </div>
+          ) : (
+            <Supply />
+          )}
         </div>
+        <ToastContainer position="bottom-right" />
       </div>
     </>
   );

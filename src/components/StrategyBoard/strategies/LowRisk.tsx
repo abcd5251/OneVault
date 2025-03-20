@@ -3,17 +3,17 @@ import { signTypedData } from '@wagmi/core';
 import { waitForTransactionReceipt } from '@wagmi/core';
 import { baseSepolia } from 'wagmi/chains';
 
-import { config } from '../../config';
+import { config } from '../../../config';
 import {
   EXECUTOR,
   USDC,
   USDC_DECIMAL,
   TYPES,
   PERMIT_EXPIRY,
-} from '../../helpers/constants';
-import { usdcAbi } from '../../abis/usdc';
-import { execution } from '../../helpers/mock-backend';
-import { createMorphoCall } from '../../helpers/strategy';
+} from '../../../helpers/constants';
+import { usdcAbi } from '../../../abis/usdc';
+import { execution } from '../../../helpers/mock-backend';
+import { createMorphoCall } from '../../../helpers/strategy';
 
 const MOCK_VAUlE = BigInt(1);
 

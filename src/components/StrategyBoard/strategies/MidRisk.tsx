@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-interface MidRiskProps {
-  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import StrategyPopup from '../StrategyBoard/StrategyPopup';
 
-export function MidRisk({ setShowPopup }: MidRiskProps) {
+// interface MidRiskProps {
+//   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+// }
+
+export function MidRisk({
+  setShowPopup,
+}: {
+  setShowPopup: (show: boolean) => void;
+}) {
   return (
     <div
       onClick={() => setShowPopup(true)}

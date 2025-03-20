@@ -6,7 +6,7 @@ import { http } from 'wagmi';
 
 export const config = getDefaultConfig({
   appName: 'My RainbowKit App',
-  projectId: '04309ed1007e77d1f119b85205bb779d',
+  projectId: import.meta.env.VITE_WC_PROJECT_ID,
   chains: [mainnet, sepolia, arbitrum, base, baseSepolia],
   transports: {
     [mainnet.id]: http(),

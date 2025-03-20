@@ -1,6 +1,6 @@
 import { useAccount } from 'wagmi';
-import WelcomeScreen from './components/WelcomeScreen';
-import DefiScreen from './components/StrategyBoard';
+import WelcomeScreen from './pages/main/WelcomeScreen';
+import DefiScreen from './pages/main/StrategyBoard';
 
 import { useState } from 'react';
 

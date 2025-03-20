@@ -1,17 +1,19 @@
 import { useState } from 'react';
 
-import CustomRainbowKitConnectButton from '../ui/CustomConnectButton';
-import StrategyPopup from './StrategyPopup';
-import ChatBox from './ChatBox';
-import StakeScreen from './SupplyPopup';
-import NewsPopup from './NewsPopup';
+import CustomRainbowKitConnectButton from '../../components/ui/CustomConnectButton';
+import StrategyPopup from '../../components/StrategyBoard/StrategyPopup';
+import ChatBox from '../../components/ChatBox';
+import NewsPopup from '../../components/News/NewsPopup';
 
-import { MidRisk, LowRisk, HighRisk } from '../strategies';
+import {
+  MidRisk,
+  LowRisk,
+  HighRisk,
+} from '../../components/StrategyBoard/strategies';
 
 export default function StrategyBoard() {
   const [showPopup, setShowPopup] = useState(false);
   const [showChatBox, setShowChatBox] = useState(false);
-  const [showStake, setShowStake] = useState(false);
   const [showNews, setShowNews] = useState(false);
 
   return (
@@ -131,11 +133,10 @@ export default function StrategyBoard() {
 
       <StrategyPopup
         isOpen={showPopup}
-        onClose={() => setShowPopup(false)}
-        setShowAIStrategy={setShowChatBox}
         setShowPopup={setShowPopup}
-        setShowStake={setShowStake}
+        setChatBox={setShowChatBox}
       />
+
       <ChatBox
         isOpen={showChatBox}
         onClose={() => setShowChatBox(false)}
@@ -143,7 +144,6 @@ export default function StrategyBoard() {
         setShowPopup={setShowPopup}
       />
 
-      <StakeScreen isOpen={showStake} onClose={() => setShowStake(false)} />
       <NewsPopup
         isOpen={showNews}
         onClose={() => setShowNews(false)}
