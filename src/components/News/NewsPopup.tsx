@@ -2,15 +2,10 @@ import { useState, useEffect } from 'react';
 
 interface LatestNewsProps {
   isOpen: boolean;
-  onClose: () => void;
   setShowNews: (show: boolean) => void;
 }
 
-export default function NewsPopup({
-  isOpen,
-  onClose,
-  setShowNews,
-}: LatestNewsProps) {
+export default function NewsPopup({ isOpen, setShowNews }: LatestNewsProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -69,7 +64,7 @@ export default function NewsPopup({
             <img
               src="/News/information.png"
               className="h-180"
-              onClick={onClose}
+              onClick={() => setShowNews(false)}
             />
           )}
         </div>

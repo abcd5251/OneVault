@@ -6,7 +6,6 @@ interface Message {
 
 interface ChatBoxProps {
   isOpen: boolean;
-  onClose: () => void;
   setShowChatBox: (show: boolean) => void;
   setShowPopup: (show: boolean) => void;
 }
@@ -54,12 +53,12 @@ export default function ChatBox({
 
     setInputText('');
   };
+
   const handleBackClick = () => {
-    setShowChatBox(false);
     setShowPopup(true);
-    setMessages([]);
-    setInputText('');
+    handleCancelClick();
   };
+
   const handleCancelClick = () => {
     setShowChatBox(false);
     setMessages([]);
@@ -77,7 +76,7 @@ export default function ChatBox({
           <div className="w-full flex items-center justify-between p-4">
             <img
               src="/AIChat/back.svg"
-              className="h-10 absolute -left-2 top-2 cursor-pointer"
+              className="h-10 absolute left-2 top-2 cursor-pointer"
               onClick={handleBackClick}
             />
             <img
@@ -86,7 +85,7 @@ export default function ChatBox({
             />
             <img
               src="/morpho/cancel.svg"
-              className="h-10 absolute -right-2 top-2 cursor-pointer"
+              className="h-10 absolute right-2 top-2 cursor-pointer"
               onClick={handleCancelClick}
             />
           </div>

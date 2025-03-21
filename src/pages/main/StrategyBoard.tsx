@@ -139,16 +139,11 @@ export default function StrategyBoard() {
 
       <ChatBox
         isOpen={showChatBox}
-        onClose={() => setShowChatBox(false)}
         setShowChatBox={setShowChatBox}
         setShowPopup={setShowPopup}
       />
 
-      <NewsPopup
-        isOpen={showNews}
-        onClose={() => setShowNews(false)}
-        setShowNews={setShowNews}
-      />
+      <NewsPopup isOpen={showNews} setShowNews={setShowNews} />
     </div>
   );
 }
