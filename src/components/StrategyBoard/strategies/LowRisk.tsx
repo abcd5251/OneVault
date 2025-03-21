@@ -17,7 +17,11 @@ import { createMorphoCall } from '../../../helpers/strategy';
 
 const MOCK_VAUlE = BigInt(1);
 
-export function LowRisk() {
+export function LowRisk({
+  setShowPopup,
+}: {
+  setShowPopup: (show: boolean) => void;
+}) {
   const { address } = useAccount();
   const { data: nonce } = useReadContract({
     abi: usdcAbi,
@@ -62,7 +66,7 @@ export function LowRisk() {
 
   return (
     <div
-      onClick={testSign}
+      onClick={() => setShowPopup(true)}
       className="w-1/3 border-2 border-black cursor-pointer hover:scale-105 transition-all duration-300">
       <div className="text-right text-[#7583A4] bg-black">
         <p>Low risk Strategy</p>

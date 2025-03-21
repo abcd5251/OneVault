@@ -46,11 +46,11 @@ export default function StrategyBoard() {
           </div>
 
           <div className="flex justify-between gap-x-2">
-            <LowRisk />
+            <LowRisk setShowPopup={setShowPopup} />
 
             <MidRisk setShowPopup={setShowPopup} />
 
-            <HighRisk />
+            <HighRisk setShowPopup={setShowPopup} />
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import APY from './Apy';
+import APY from './apy';
 import LinkComponent from './LinkComponent';
 
 interface MorphoVaultProps {
@@ -17,18 +17,37 @@ export default function MorphoVault({
   return (
     <div className="relative px-24 py-10 bg-[#105DE5]">
       <img src="/morpho/Morpho.svg" className="h-10 mb-4 inline-block ml-0.5" />
-      <img
-        src="/morpho/mark.svg"
-        className="h-8 mb-4 ml-2 inline-block cursor-pointer"
-        onClick={() => setShowMorpho(!showMorpho)}
-      />
-      {showMorpho && (
+
+      <div className="relative inline-block">
         <img
-          src="/morpho/morphoShow.svg"
-          className="absolute -top-48 right-6 transition-opacity duration-500 ease-in-out"
-          style={{ opacity: showMorpho ? 1 : 0, zIndex: 10 }}
+          src="/morpho/mark.svg"
+          className="h-8 mb-4 ml-2 inline-block cursor-pointer"
+          onClick={() => setShowMorpho(!showMorpho)}
         />
-      )}
+        {showMorpho && (
+          <div
+            className="absolute"
+            style={{
+              left: '50%',
+              bottom: '100%',
+              transform: 'translateX(-50%)',
+              maxWidth: 'none',
+              width: 'auto',
+              zIndex: 50,
+            }}>
+            <img
+              src="/morpho/morphoShow.svg"
+              alt="What's Morpho"
+              style={{
+                maxWidth: 'none',
+                width: 'auto',
+                height: 'auto',
+              }}
+            />
+          </div>
+        )}
+      </div>
+
       <LinkComponent />
       <div className="space-y-4">
         <h1 className="text-[25px] ">
@@ -47,7 +66,7 @@ export default function MorphoVault({
           </div>
         </div>
       </div>
-      <div className="mt-20 flex flex-col items-center gap-y-2">
+      <div className="mt-8 flex flex-col items-center gap-y-2">
         <img
           src="/morpho/AiButton.svg"
           onClick={handleChatBox}

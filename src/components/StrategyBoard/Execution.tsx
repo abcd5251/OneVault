@@ -90,13 +90,13 @@ export default function Execution() {
   }
 
   return (
-    <section className="flex flex-col items-center px-5 py-10 bg-blue-600 shadow min-h-[546px]">
-      <h1 className="mb-8 text-4xl text-center text-white max-sm:text-3xl [font-family:'Lilita_One',Helvetica] [text-shadow:2px_2px_0px_#000] [-webkit-text-stroke:1.5px_#000]">
+    <section className="flex flex-col items-center justify-around px-15 py-10 bg-[#105DE5] shadow min-h-[546px]">
+      <h1 className="mb-8 text-[35px] text-center text-white max-sm:text-3xl [font-family:'Lilita_One',Helvetica] [text-shadow:2px_2px_0px_#000] [-webkit-text-stroke:1.5px_#000]">
         Ready to Deploy? Let&apos;s Lock It In!
       </h1>
 
-      <div className="flex items-center justify-between w-full max-w-[800px] mb-10 px-4">
-        <h2 className="text-4xl text-white [font-family:'Lilita_One',Helvetica] [text-shadow:2px_2px_0px_#000] [-webkit-text-stroke:1.5px_#000]">
+      <div className="flex items-center justify-between w-full max-w-[800px] mb-10">
+        <h2 className="text-[35px] text-white [font-family:'Lilita_One',Helvetica] [text-shadow:2px_2px_0px_#000] [-webkit-text-stroke:1.5px_#000]">
           Beets staking strategy
         </h2>
 
@@ -125,7 +125,7 @@ export default function Execution() {
         </div>
       </div>
 
-      <p className="mb-10 text-xl tracking-normal text-center text-white max-w-[654px] [font-family:'Lilita_One',Helvetica]">
+      <p className=" text-xl tracking-normal text-center text-white max-w-[654px] [font-family:'Lilita_One',Helvetica]">
         Once you confirm, your funds will be allocated automatically.
         <br />
         No extra steps—just sit back and let the AI optimize for you
@@ -147,7 +147,7 @@ export default function Execution() {
           <img
             src="/confirm.png"
             onClick={handleSubmit(onSubmit)}
-            className="h-16 cursor-pointer"
+            className="mt-10 h-16 cursor-pointer"
           />
         </div>
       </div>

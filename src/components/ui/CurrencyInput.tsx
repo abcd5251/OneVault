@@ -37,14 +37,14 @@ const CurrencyInput = forwardRef<HTMLInputElement, Props>(
             clipPath: 'polygon(0 0, 100% 0, 95% 100%, 0 100%)',
           }}></div>
 
-        {/* Input container - add pointer-events-none to parent, but allow events on children */}
+        {/* Input container */}
         <div
-          className="relative w-full h-full z-10 pointer-events-none"
+          className="relative w-full h-full z-10"
           style={{
             clipPath: 'polygon(0 0, 100% 0, 95% 100%, 0 100%)',
           }}>
-          {/* Currency selector area - restore pointer events */}
-          <div className="absolute left-0 top-0 bottom-0 w-[70px] bg-[#0A87FE] z-10 pointer-events-auto">
+          {/* Currency selector area */}
+          <div className="absolute left-0 top-0 bottom-0 w-[70px] bg-[#0A87FE] z-10">
             <button
               className="w-full h-full flex items-center justify-center focus:outline-none"
               onClick={() => setIsOpen(!isOpen)}>
@@ -61,29 +61,22 @@ const CurrencyInput = forwardRef<HTMLInputElement, Props>(
             </div>
           </div>
 
-          {/* Input area - restore pointer events */}
-          <div className="absolute left-[70px] right-0 top-0 bottom-0 bg-[#1E47AB] flex items-center pl-8 pointer-events-auto">
+          {/* Input area */}
+          <div className="absolute left-[70px] right-0 top-0 bottom-0 bg-[#1E47AB] flex items-center pl-8">
             <input
               ref={ref}
               name={name}
-              type="number"
+              type="string"
               value={value?.amount || amount}
               onChange={(e) => handleAmountChange(e.target.value)}
               placeholder={`Select the amount of USDC or USDT to deploy..`}
               className="w-full bg-transparent border-none outline-none text-white text-lg font-medium placeholder-gray-200"
               min="0"
               step="0.01"
+              onFocus={() => setIsOpen(false)} // Close dropdown when focusing on input
             />
           </div>
         </div>
-
-        {/* Add a pseudo-element to handle pointer events and maintain the clip-path */}
-        <div
-          className="absolute inset-0 z-20 pointer-events-auto"
-          style={{
-            clipPath: 'polygon(0 0, 100% 0, 95% 100%, 0 100%)',
-            backgroundColor: 'transparent',
-          }}></div>
 
         {/* Dropdown positioned under the currency icon */}
         {isOpen && (
@@ -100,7 +93,7 @@ const CurrencyInput = forwardRef<HTMLInputElement, Props>(
               {currencies.map((currency) => (
                 <div
                   key={currency.id}
-                  className="py-3 px-4 cursor-pointer hover:bg-gray-100"
+                  className="py-3 px-4 cursor-pointer hover:bg-gray-300"
                   onClick={() => handleCurrencyChange(currency)}>
                   <div className="flex items-center">
                     <img

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 import Morpho from '../Morpho';
-import Supply from './Execution';
+import Execution from './Execution';
 
 interface StrategyPopupProps {
   isOpen: boolean;
@@ -61,7 +61,7 @@ export default function StrategyPopup({
               setShowDepositForm={setShowDepositForm}
             />
           ) : (
-            <Supply />
+            <Execution />
           )}
         </div>
         <ToastContainer position="bottom-right" />

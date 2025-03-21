@@ -1,12 +1,13 @@
-export function HighRisk() {
+export function HighRisk({
+  setShowPopup,
+}: {
+  setShowPopup: (show: boolean) => void;
+}) {
   return (
-    <div className="w-1/3 border-2 border-black cursor-pointer hover:scale-105 transition-all duration-300">
-      <div
-        onClick={() => {
-          // TODO
-          console.log('High-Risk Strategy');
-        }}
-        className="text-right text-[#7583A4] bg-black">
+    <div
+      onClick={() => setShowPopup(true)}
+      className="w-1/3 border-2 border-black cursor-pointer hover:scale-105 transition-all duration-300">
+      <div className="text-right text-[#7583A4] bg-black">
         <p>High-Risk Strategy</p>
       </div>
       <div
