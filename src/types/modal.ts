@@ -13,7 +13,7 @@ export enum ModalType {
  */
 export interface ModalState {
   activeModal: ModalType | null;
-  contextData?: Record<string, any>;
+  contextData?: Record<string, unknown>;
 }
 
 /**
@@ -21,7 +21,7 @@ export interface ModalState {
  */
 export interface ModalContextValue {
   state: ModalState;
-  openModal: (modal: ModalType, contextData?: Record<string, any>) => void;
+  openModal: (modal: ModalType, contextData?: Record<string, unknown>) => void;
   closeModal: () => void;
 }
 

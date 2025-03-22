@@ -5,22 +5,24 @@ import ApyBadge from '@/components/ui/ApyBadge';
 import LinkBadge from '@/components/ui/LinkBadge';
 import CurrencyInput from '@/components/ui/CurrencyInput';
 import { STRATEGY_CONFIG } from '@/constants';
+import { StrategyType, ModalType } from '@/types';
 
 type StrategyContentProps = {
-  strategyType?: string;
+  strategyType?: StrategyType;
   showDepositForm: boolean;
   setShowDepositForm: (show: boolean) => void;
 };
 
 export default function StrategyContent({
-  strategyType = 'low-risk',
+  strategyType = StrategyType.LOW_RISK,
   showDepositForm,
   setShowDepositForm,
 }: StrategyContentProps) {
   const [showMorpho, setShowMorpho] = useState(false);
   const { openModal } = useModal();
 
-  const config = STRATEGY_CONFIG[strategyType] || STRATEGY_CONFIG['low-risk'];
+  const config =
+    STRATEGY_CONFIG[strategyType] || STRATEGY_CONFIG[StrategyType.LOW_RISK];
 
   return (
     <div className={`relative px-24 py-10 ${config.backgroundColor}`}>
@@ -86,7 +88,7 @@ export default function StrategyContent({
           <div className="mt-8 flex flex-col items-center gap-y-2">
             <img
               src="/common/chatbox.svg"
-              onClick={() => openModal('chat')}
+              onClick={() => openModal(ModalType.CHAT)}
               className="h-16 ml-1.5 cursor-pointer"
             />
             <img

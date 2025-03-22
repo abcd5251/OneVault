@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
+
 import { useModal } from '@/contexts/ModalContext';
 import Modal from '@/components/ui/Modal';
 import StrategyContent from './StrategyContent';
@@ -30,7 +31,7 @@ export default function StrategyModal() {
         onBack={() => setShowDepositForm(false)}
         showToast={true}>
         <StrategyContent
-          strategyType={strategyType}
+          strategyType={strategyType as StrategyType}
           showDepositForm={showDepositForm}
           setShowDepositForm={setShowDepositForm}
         />

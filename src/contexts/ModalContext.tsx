@@ -14,7 +14,7 @@ export function ModalProvider({ children }: { children: ReactNode }) {
   // 將 openPopup 改為 openModal
   const openModal = (
     modal: ModalType,
-    contextData: Record<string, any> = {},
+    contextData: Record<string, unknown> = {},
   ) => {
     setState({
       activeModal: modal,
