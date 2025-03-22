@@ -3,30 +3,22 @@ import { ToastContainer } from 'react-toastify';
 import { usePopup } from '@/contexts/PopupContext';
 import Modal from '@/components/ui/Modal';
 import StrategyContent from './StrategyContent';
+import { StrategyType } from '@/types';
+import { STRATEGY_DISPLAY_INFO } from '@/constants';
+import { PopupType } from '@/types';
 
 export default function StrategyPopup() {
   const { state, closePopup } = usePopup();
-  const isVisible = state.activePopup === 'strategy';
+  const isVisible = state.activePopup === PopupType.STRATEGY;
   const [showDepositForm, setShowDepositForm] = useState(false);
 
   // 從 context 數據獲取策略類型
-  const strategyType = state.contextData?.strategyType || 'low-risk';
+  const strategyType = state.contextData?.strategyType || StrategyType.LOW_RISK;
 
-  // 根據策略類型確定標題和圖標
-  const getStrategyInfo = (type: string) => {
-    switch (type) {
-      case 'low-risk':
-        return { title: 'SAFE HARBOR', icon: '🛡️' };
-      case 'mid-risk':
-        return { title: 'BALANCED', icon: '⚖️' };
-      case 'high-risk':
-        return { title: 'HIGH STAKES', icon: '🚀' };
-      default:
-        return { title: 'SAFE HARBOR', icon: '🛡️' };
-    }
-  };
-
-  const { title, icon } = getStrategyInfo(strategyType);
+  // 獲取當前策略顯示信息
+  const { title, icon } =
+    STRATEGY_DISPLAY_INFO[strategyType as StrategyType] ||
+    STRATEGY_DISPLAY_INFO[StrategyType.LOW_RISK];
 
   return (
     <>
