@@ -6,6 +6,8 @@ import CurrencyInput from '@/components/ui/CurrencyInput';
 
 type StrategyContentProps = {
   strategyType?: string;
+  showDepositForm: boolean;
+  setShowDepositForm: (show: boolean) => void;
 };
 
 type StrategyConfig = {
@@ -28,8 +30,9 @@ type StrategyConfig = {
 
 export default function StrategyContent({
   strategyType = 'low-risk',
+  showDepositForm,
+  setShowDepositForm,
 }: StrategyContentProps) {
-  const [showDepositForm, setShowDepositForm] = useState(false);
   const [showMorpho, setShowMorpho] = useState(false);
   const { openPopup } = usePopup();
 
