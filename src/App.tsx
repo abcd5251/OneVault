@@ -5,7 +5,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Layout from './layout';
 import { config } from './config';
 import { Routes, Route } from 'react-router';
-import Dev from './pages/dev';
+import { Group } from './pages/dev';
+import { ModalProvider } from './contexts/ModalContext';
 
 const queryClient = new QueryClient();
 
@@ -14,10 +15,12 @@ export default function App() {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <Routes>
-            <Route path="/" element={<Layout />} />
-            <Route path="/dev" element={<Dev />} />
-          </Routes>
+          <ModalProvider>
+            <Routes>
+              <Route path="/" element={<Layout />} />
+              <Route path="/dev" element={<Group />} />
+            </Routes>
+          </ModalProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

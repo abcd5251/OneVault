@@ -2,35 +2,32 @@ import { encodeFunctionData, toHex } from 'viem';
 import type { Address, Hex } from 'viem';
 import { readContract } from '@wagmi/core';
 
-import type { Call } from './mock-backend';
+import type { Call } from '@/services/strategyExecutionService';
+import { usdcAbi } from '@/abis/usdc';
+import { morphoAbi } from '@/abis/morpho';
+import { config } from '@/config';
+import { Contracts } from '@/constants/contracts';
 
-import { usdcAbi } from '../abis/usdc';
-import {
-  EXECUTOR,
-  MORPHO_BLUE,
-  MORPHO_WETH_USDC_MARKET,
-  USDC,
-} from './constants';
-import { morphoAbi } from '../abis/morpho';
-import { config } from '../config';
-
+// TODO(optional): move this function into LowRiskExecutor
 export async function createMorphoCall(
+  contracts: Contracts,
   user: Address,
   amount: bigint,
   deadline: bigint,
   signature: Hex,
 ) {
   const calls: Call[] = [];
+  const { executor, tokens, morpho } = contracts;
 
   //* Step 1  USDC Permit
   {
     const data = encodeFunctionData({
       abi: usdcAbi,
       functionName: 'permit',
-      args: [user, EXECUTOR, amount, deadline, signature],
+      args: [user, executor, amount, deadline, signature],
     });
     calls.push({
-      target: USDC,
+      target: tokens.usdc.address,
       callData: data,
     });
   }
@@ -40,10 +37,10 @@ export async function createMorphoCall(
     const data = encodeFunctionData({
       abi: usdcAbi,
       functionName: 'transferFrom',
-      args: [user, EXECUTOR, amount],
+      args: [user, executor, amount],
     });
     calls.push({
-      target: USDC,
+      target: tokens.usdc.address,
       callData: data,
     });
   }
@@ -53,17 +50,20 @@ export async function createMorphoCall(
     const data = encodeFunctionData({
       abi: usdcAbi,
       functionName: 'approve',
-      args: [MORPHO_BLUE, amount],
+      args: [morpho.blue, amount],
     });
     calls.push({
-      target: USDC,
+      target: tokens.usdc.address,
       callData: data,
     });
   }
 
   //* Step 4  Supply USDC to morpho blue
   {
-    const marketParams = await getMarketParams(MORPHO_WETH_USDC_MARKET);
+    const marketParams = await getMarketParams(
+      morpho.blue,
+      morpho.wethUsdcMarket,
+    );
 
     const data = encodeFunctionData({
       abi: morphoAbi,
@@ -71,7 +71,7 @@ export async function createMorphoCall(
       args: [marketParams, amount, BigInt(0), user, toHex('')],
     });
     calls.push({
-      target: MORPHO_BLUE,
+      target: morpho.blue,
       callData: data,
     });
   }
@@ -79,12 +79,12 @@ export async function createMorphoCall(
   return calls;
 }
 
-async function getMarketParams(marketId: Hex) {
+async function getMarketParams(morphoBlue: Address, marketId: Hex) {
   const [loanToken, collateralToken, oracle, irm, lltv] = await readContract(
     config,
     {
       abi: morphoAbi,
-      address: MORPHO_BLUE,
+      address: morphoBlue,
       functionName: 'idToMarketParams',
       args: [marketId],
     },
