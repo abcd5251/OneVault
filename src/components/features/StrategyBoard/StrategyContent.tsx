@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useAccount, useChainId } from 'wagmi';
 
 import { useModal } from '@/contexts/ModalContext';
 import ApyBadge from '@/components/ui/ApyBadge';
@@ -20,6 +21,9 @@ export default function StrategyContent({
   showDepositForm,
   setShowDepositForm,
 }: StrategyContentProps) {
+  const { address } = useAccount();
+  const chainId = useChainId();
+
   const [showMorpho, setShowMorpho] = useState(false);
   const [amount, setAmount] = useState(0);
   const [isExecuting, setIsExecuting] = useState(false);
@@ -28,7 +32,7 @@ export default function StrategyContent({
   const config =
     STRATEGY_CONFIG[strategyType] || STRATEGY_CONFIG[StrategyType.LOW_RISK];
 
-  const executor = getStrategyExecutor(strategyType);
+  const executor = getStrategyExecutor(chainId, strategyType);
 
   const handleExecuteStrategy = async () => {
     if (!amount || amount <= 0) {
@@ -37,6 +41,8 @@ export default function StrategyContent({
     }
 
     setIsExecuting(true);
+
+    console.log('Amount', amount);
 
     try {
       const isValid = await executor.validate(amount);
@@ -56,7 +62,7 @@ export default function StrategyContent({
         }
       }
 
-      const result = await executor.execute(amount);
+      const result = await executor.execute(address!, amount.toString());
 
       if (result.success) {
         toast.success(result.message || '策略執行成功');

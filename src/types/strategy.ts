@@ -6,6 +6,7 @@ export enum StrategyType {
   LOW_RISK = 'low-risk',
   MID_RISK = 'mid-risk',
   HIGH_RISK = 'high-risk',
+  // DEPOSIT = 'deposit',
 }
 
 /**

@@ -17,7 +17,7 @@ export default function StrategyModal() {
 
   // 獲取當前策略顯示信息
   const { title, icon } =
-    STRATEGY_DISPLAY_INFO[strategyType as StrategyType] ||
+    STRATEGY_DISPLAY_INFO[strategyType as StrategyType] || // TODO: fix deposit in StrategyType
     STRATEGY_DISPLAY_INFO[StrategyType.LOW_RISK];
 
   return (
