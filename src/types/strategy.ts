@@ -29,19 +29,3 @@ export interface StrategyConfig {
     hint: string;
   };
 }
-
-/**
- * 策略內容組件的 Props
- */
-export type StrategyContentProps = {
-  strategyType?: StrategyType | string;
-  showDepositForm: boolean;
-  setShowDepositForm: (show: boolean) => void;
-};
-
-/**
- * 策略卡片組件的 Props
- */
-export type StrategyCardProps = {
-  setShowPopup?: (show: boolean) => void;
-};
