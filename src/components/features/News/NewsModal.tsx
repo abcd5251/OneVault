@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
-import { usePopup } from '@/contexts/PopupContext';
+import { useModal } from '@/contexts/ModalContext';
 import Modal from '@/components/ui/Modal';
+import { ModalType } from '@/types';
 
-export default function NewsPopup() {
+export default function NewsModal() {
   const [isLoading, setIsLoading] = useState(true);
 
   // 完全使用 Context
-  const { state, closePopup } = usePopup();
+  const { state, closeModal } = useModal();
 
   // 只使用 Context 的顯示狀態
-  const isVisible = state.activePopup === 'news';
+  const isVisible = state.activeModal === ModalType.NEWS;
 
   useEffect(() => {
     if (isVisible) {
@@ -30,11 +31,10 @@ export default function NewsPopup() {
   return (
     <Modal
       isVisible={isVisible}
-      onClose={closePopup}
+      onClose={closeModal}
       title="Latest DeFi News"
       icon="📰"
       customStyles={customStyles}>
-      {/* 這裡保留原有 NewsPopup 的內容區域，但移除外層結構 */}
       <div className="p-4">
         {isLoading ? (
           <div className="flex justify-center">

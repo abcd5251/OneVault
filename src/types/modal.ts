@@ -2,7 +2,7 @@
  * 彈窗類型枚舉
  * 用於標識不同類型的彈窗
  */
-export enum PopupType {
+export enum ModalType {
   STRATEGY = 'strategy',
   CHAT = 'chat',
   NEWS = 'news',
@@ -11,18 +11,18 @@ export enum PopupType {
 /**
  * 彈窗上下文狀態
  */
-export interface PopupState {
-  activePopup: PopupType | null;
+export interface ModalState {
+  activeModal: ModalType | null;
   contextData?: Record<string, any>;
 }
 
 /**
  * 彈窗上下文值
  */
-export interface PopupContextValue {
-  state: PopupState;
-  openPopup: (popup: PopupType, contextData?: Record<string, any>) => void;
-  closePopup: () => void;
+export interface ModalContextValue {
+  state: ModalState;
+  openModal: (modal: ModalType, contextData?: Record<string, any>) => void;
+  closeModal: () => void;
 }
 
 /**

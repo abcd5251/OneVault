@@ -1,4 +1,5 @@
-import { usePopup } from '@/contexts/PopupContext';
+import { useModal } from '@/contexts/ModalContext';
+import { ModalType, StrategyType } from '@/types';
 
 // 保留向後兼容的 props 類型
 export function LowRisk({
@@ -6,7 +7,7 @@ export function LowRisk({
 }: {
   setShowPopup?: (show: boolean) => void;
 }) {
-  const { openPopup } = usePopup();
+  const { openModal } = useModal();
 
   const handleClick = () => {
     // 如果提供了舊式 prop，則調用
@@ -14,7 +15,7 @@ export function LowRisk({
       setShowPopup(true);
     }
     // 使用 Context 方法
-    openPopup('strategy', { strategyType: 'low-risk' });
+    openModal(ModalType.STRATEGY, { strategyType: StrategyType.LOW_RISK });
   };
 
   return (

@@ -1,11 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { usePopup } from '@/contexts/PopupContext';
+import { useModal } from '@/contexts/ModalContext';
 import Modal from '@/components/ui/Modal';
-
-interface Message {
-  text: string;
-  isUser: boolean;
-}
+import { Message, ModalType } from '@/types';
 
 export default function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -13,10 +9,10 @@ export default function ChatBox() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // 完全使用 Context
-  const { state, openPopup, closePopup } = usePopup();
+  const { state, openModal, closeModal } = useModal();
 
   // 只使用 Context 的顯示狀態
-  const isVisible = state.activePopup === 'chat';
+  const isVisible = state.activeModal === ModalType.CHAT;
 
   const handleSendMessage = () => {
     if (inputText.trim() === '') return;
@@ -55,11 +51,11 @@ export default function ChatBox() {
   return (
     <Modal
       isVisible={isVisible}
-      onClose={closePopup}
+      onClose={closeModal}
       title="AI STRATEGIST"
       icon=""
       showBackButton={true}
-      onBack={() => openPopup('strategy')}
+      onBack={() => openModal(ModalType.STRATEGY)}
       customStyles={customStyles}>
       <div className="flex flex-col items-center w-full">
         {messages.length === 0 ? (

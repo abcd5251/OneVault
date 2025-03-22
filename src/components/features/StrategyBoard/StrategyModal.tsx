@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { usePopup } from '@/contexts/PopupContext';
+import { useModal } from '@/contexts/ModalContext';
 import Modal from '@/components/ui/Modal';
 import StrategyContent from './StrategyContent';
-import { StrategyType } from '@/types';
+import { StrategyType, ModalType } from '@/types';
 import { STRATEGY_DISPLAY_INFO } from '@/constants';
-import { PopupType } from '@/types';
 
-export default function StrategyPopup() {
-  const { state, closePopup } = usePopup();
-  const isVisible = state.activePopup === PopupType.STRATEGY;
+export default function StrategyModal() {
+  const { state, closeModal } = useModal();
+  const isVisible = state.activeModal === ModalType.STRATEGY;
   const [showDepositForm, setShowDepositForm] = useState(false);
 
   // 從 context 數據獲取策略類型
@@ -24,7 +23,7 @@ export default function StrategyPopup() {
     <>
       <Modal
         isVisible={isVisible}
-        onClose={closePopup}
+        onClose={closeModal}
         title={title}
         icon={icon}
         showBackButton={showDepositForm}

@@ -1,4 +1,4 @@
-import { PopupType } from '../types';
+import { ModalType } from '../types';
 
 /**
  * 常見問題列表
@@ -22,22 +22,21 @@ export const COMMON_QUESTIONS = [
     value: 'What risks should I be aware of?',
   },
 ];
-
 /**
  * UI 樣式常量
  * 彈窗的預設樣式設置
  */
-export const POPUP_STYLES = {
-  [PopupType.STRATEGY]: {
+export const MODAL_STYLES = {
+  [ModalType.STRATEGY]: {
     container: 'bg-[#4c94fa]',
     content: 'flex flex-col',
   },
-  [PopupType.CHAT]: {
+  [ModalType.CHAT]: {
     container: 'bg-[#4685f5] max-h-[80vh]',
     header: 'bg-transparent border-b-0',
     content: 'flex flex-col p-4',
   },
-  [PopupType.NEWS]: {
+  [ModalType.NEWS]: {
     container: 'bg-[#2C3E50] max-w-[700px]',
     content: 'py-4',
   },

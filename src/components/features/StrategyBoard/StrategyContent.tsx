@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { usePopup } from '@/contexts/PopupContext';
+import { useModal } from '@/contexts/ModalContext';
 import ApyBadge from '@/components/ui/ApyBadge';
 import LinkBadge from '@/components/ui/LinkBadge';
 import CurrencyInput from '@/components/ui/CurrencyInput';
@@ -34,7 +34,7 @@ export default function StrategyContent({
   setShowDepositForm,
 }: StrategyContentProps) {
   const [showMorpho, setShowMorpho] = useState(false);
-  const { openPopup } = usePopup();
+  const { openModal } = useModal();
 
   // 基於策略類型的配置
   const strategyConfig: Record<string, StrategyConfig> = {
@@ -159,7 +159,7 @@ export default function StrategyContent({
           <div className="mt-8 flex flex-col items-center gap-y-2">
             <img
               src="/common/chatbox.svg"
-              onClick={() => openPopup('chat')}
+              onClick={() => openModal('chat')}
               className="h-16 ml-1.5 cursor-pointer"
             />
             <img

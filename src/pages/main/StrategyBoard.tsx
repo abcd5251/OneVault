@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import CustomRainbowKitConnectButton from '@/components/ui/CustomConnectButton';
 
 import ChatBox from '@/components/features/ChatBox';
-import NewsPopup from '@/components/features/News/NewsPopup';
-import StrategyPopup from '@/components/features/StrategyBoard/StrategyPopup';
+import NewsModal from '@/components/features/News/NewsModal';
+import StrategyModal from '@/components/features/StrategyBoard/StrategyModal';
 
 import {
   MidRisk,
@@ -12,20 +12,21 @@ import {
   HighRisk,
 } from '@/components/features/StrategyBoard/strategies';
 
-import { usePopup } from '../../contexts/PopupContext';
+import { useModal } from '@/contexts/ModalContext';
+import { ModalType } from '@/types';
 
 export default function StrategyBoard() {
-  // 使用 Context Hook
-  const { state, openPopup } = usePopup();
+  // 使用 Modal Context Hook
+  const { state, openModal } = useModal();
 
   // 監聽 Context 狀態變化
   useEffect(() => {
-    console.log('PopupContext state updated:', state);
+    console.log('ModalContext state updated:', state);
   }, [state]);
 
   // 使用統一的處理函數，用於所有策略卡片
   const handleStrategyCardClick = (strategyType: string) => {
-    openPopup('strategy', { strategyType });
+    openModal(ModalType.STRATEGY, { strategyType });
   };
 
   return (
@@ -119,7 +120,7 @@ export default function StrategyBoard() {
         <div className="ml-auto flex justify-center items-end gap-x-3 pr-3">
           <button
             onClick={() => {
-              openPopup('news'); // 直接使用 Context 方法
+              openModal(ModalType.NEWS); // 直接使用 Context 方法
               console.log('News clicked');
             }}
             type="button"
@@ -133,7 +134,7 @@ export default function StrategyBoard() {
 
           <button
             onClick={() => {
-              openPopup('chat'); // 直接使用 Context 方法
+              openModal(ModalType.CHAT); // 直接使用 Context 方法
               console.log('AI Chat clicked');
             }}
             type="button"
@@ -148,9 +149,9 @@ export default function StrategyBoard() {
       </div>
 
       {/* 所有彈窗 */}
-      <StrategyPopup />
+      <StrategyModal />
       <ChatBox />
-      <NewsPopup />
+      <NewsModal />
     </div>
   );
 }
