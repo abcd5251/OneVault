@@ -135,7 +135,7 @@ export default function OnboardingModal({
                   className="border border-black z-50 parallelogram bg-red-700 px-3 py-1 text-white hover:bg-red-800 transition-colors shadow-[0_4px_0_0_rgba(0,0,0,1)]">
                   <span className="sr-only">Close</span>
                   <img
-                    src="/icon-cancel.png"
+                    src="/main/icon-cancel.png"
                     className="w-5 h-5 object-contain"
                   />
                 </button>
@@ -146,7 +146,7 @@ export default function OnboardingModal({
               <div className="flex flex-col sm:flex-row flex-1">
                 <div className="flex items-center justify-center sm:mx-5">
                   <img
-                    src="/deposit-logo.png"
+                    src="/main/deposit-logo.png"
                     className="w-56 h-56 object-contain"
                   />
                 </div>

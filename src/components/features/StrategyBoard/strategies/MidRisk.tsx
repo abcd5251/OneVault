@@ -29,7 +29,7 @@ export function MidRisk({
           </div>
         </div>
       </div>
-      <div className="bg-[url('/balanced.png')] object-contain h-32 w-full" />
+      <div className="bg-[url('/main/balanced.png')] object-contain h-32 w-full" />
     </div>
   );
 }

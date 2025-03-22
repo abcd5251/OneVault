@@ -29,10 +29,13 @@ export default function StrategyBoard() {
   };
 
   return (
-    <div className="relative bg-[url('/defi-background.png')] bg-cover bg-center bg-no-repeat h-screen w-full overflow-y-scroll">
+    <div className="relative bg-[url('/main/defi-background.png')] bg-cover bg-center bg-no-repeat h-screen w-full overflow-y-scroll">
       {/* HEADER */}
       <div className="absolute top-0 w-full flex z-50">
-        <img src="stat-titles.png" className="object-contain w-96 h-auto" />
+        <img
+          src="/main/stat-titles.png"
+          className="object-contain w-96 h-auto"
+        />
         <div className="ml-auto mr-3 mt-3">
           <CustomRainbowKitConnectButton />
         </div>
@@ -79,7 +82,7 @@ export default function StrategyBoard() {
             type="button"
             className="focus:outline-none">
             <img
-              src="/btn-rewards.svg"
+              src="/main/btn-rewards.svg"
               className="h-24 w-auto object-contain hover:scale-105 transition-all duration-300"
               alt="Rewards"
             />
@@ -93,7 +96,7 @@ export default function StrategyBoard() {
             type="button"
             className="focus:outline-none">
             <img
-              src="/btn-quests.svg"
+              src="/main/btn-quests.svg"
               className="h-24 w-auto object-contain hover:scale-105 transition-all duration-300"
               alt="Quests"
             />
@@ -107,7 +110,7 @@ export default function StrategyBoard() {
             type="button"
             className="focus:outline-none">
             <img
-              src="/btn-history.svg"
+              src="/main/btn-history.svg"
               className="h-24 w-auto object-contain hover:scale-105 transition-all duration-300"
               alt="History"
             />
@@ -122,7 +125,7 @@ export default function StrategyBoard() {
             type="button"
             className="focus:outline-none">
             <img
-              src="/btn-news.svg"
+              src="/main/btn-news.svg"
               className="h-24 w-auto object-contain hover:scale-105 transition-all duration-300"
               alt="News"
             />
@@ -136,7 +139,7 @@ export default function StrategyBoard() {
             type="button"
             className="focus:outline-none">
             <img
-              src="/btn-ai-chat.svg"
+              src="/main/btn-ai-chat.svg"
               className="h-20 w-auto object-contain hover:scale-105 transition-all duration-300"
               alt="AI Chat"
             />

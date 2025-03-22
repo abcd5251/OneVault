@@ -9,9 +9,9 @@ export default function WelcomeScreen({ setIsDeposited }: Props) {
   const [openModal, setOpenModal] = useState(false);
 
   return (
-    <div className="relative bg-[url('/background.png')] bg-cover bg-center bg-no-repeat h-screen w-full overflow-y-scroll">
+    <div className="relative bg-[url('/main/background.png')] bg-cover bg-center bg-no-repeat h-screen w-full overflow-y-scroll">
       <div className="relative flex items-center justify-center h-full flex-col">
-        <img src="/victory.png" className="w-56 h-40 object-contain" />
+        <img src="/main/victory.png" className="w-56 h-40 object-contain" />
         <h1
           style={{
             textShadow: ' -5px 3px 0px #000000',

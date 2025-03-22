@@ -1,4 +1,3 @@
-import { useAccount } from 'wagmi';
 import { usePopup } from '@/contexts/PopupContext';
 
 // 保留向後兼容的 props 類型
@@ -7,7 +6,6 @@ export function LowRisk({
 }: {
   setShowPopup?: (show: boolean) => void;
 }) {
-  const { address } = useAccount();
   const { openPopup } = usePopup();
 
   const handleClick = () => {
@@ -41,7 +39,7 @@ export function LowRisk({
           </div>
         </div>
       </div>
-      <div className="bg-[url('/defi-background.png')] object-contain h-32 w-full" />
+      <div className="bg-[url('/main/defi-background.png')] object-contain h-32 w-full" />
     </div>
   );
 }

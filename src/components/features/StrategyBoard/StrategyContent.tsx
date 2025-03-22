@@ -51,8 +51,8 @@ export default function StrategyContent({
       },
       backgroundColor: 'bg-[#105DE5]',
       images: {
-        banner: '/morpho/Morpho.svg',
-        hint: '/morpho/morphoShow.svg',
+        banner: '/morpho/banner.svg',
+        hint: '/morpho/hint.svg',
       },
     },
     'mid-risk': {
@@ -69,8 +69,8 @@ export default function StrategyContent({
       },
       backgroundColor: 'bg-[#105DE5]',
       images: {
-        banner: '/morpho/Morpho.svg',
-        hint: '/morpho/morphoShow.svg',
+        banner: '/morpho/banner.svg',
+        hint: '/morpho/hint.svg',
       },
     },
     'high-risk': {
@@ -107,7 +107,7 @@ export default function StrategyContent({
 
           <div className="relative inline-block">
             <img
-              src="/morpho/mark.svg"
+              src="/common/mark.svg"
               className="h-8 mb-4 ml-2 inline-block cursor-pointer"
               onClick={() => setShowMorpho(!showMorpho)}
             />
@@ -158,12 +158,12 @@ export default function StrategyContent({
           {/* 按鈕區域 */}
           <div className="mt-8 flex flex-col items-center gap-y-2">
             <img
-              src="/morpho/AiButton.svg"
+              src="/common/chatbox.svg"
               onClick={() => openPopup('chat')}
               className="h-16 ml-1.5 cursor-pointer"
             />
             <img
-              src="/morpho/deposit.svg"
+              src="/common/deposit.svg"
               onClick={() => setShowDepositForm(true)}
               className="h-16 cursor-pointer"
             />
@@ -228,7 +228,7 @@ export default function StrategyContent({
 
                 {/* Main button - blue parallelogram */}
                 <img
-                  src="/confirm.png"
+                  src="/common/confirm.png"
                   onClick={() => console.log('execute')}
                   className="mt-10 h-16 cursor-pointer"
                 />

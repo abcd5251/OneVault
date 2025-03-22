@@ -61,7 +61,7 @@ export default function ChatBox() {
       customStyles={customStyles}>
       <div className="flex flex-col items-center px-4 flex-1 overflow-hidden">
         {/* Bear Icon */}
-        <img src="/AIChat/bear.svg" className="h-20" />
+        <img src="/chatbox/bear.svg" className="h-20" />
 
         {messages.length === 0 ? (
           <>

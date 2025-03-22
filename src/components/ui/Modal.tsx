@@ -47,7 +47,7 @@ export default function Modal({
                 onClick={onBack}
                 className="absolute left-0 flex items-center text-white hover:text-blue-200">
                 <img
-                  src="/AIChat/back.svg"
+                  src="/common/back.svg"
                   className="h-10 left-2 top-2 cursor-pointer"
                 />
               </button>
@@ -71,7 +71,7 @@ export default function Modal({
             )}
 
             <img
-              src="/morpho/cancel.svg"
+              src="/common/cancel.svg"
               className="h-10 absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer"
               onClick={onClose}
             />

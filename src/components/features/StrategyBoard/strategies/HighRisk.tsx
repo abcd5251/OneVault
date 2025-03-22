@@ -25,7 +25,7 @@ export function HighRisk({
           </div>
         </div>
       </div>
-      <div className="bg-[url('/high-risk.png')] object-contain h-32 w-full" />
+      <div className="bg-[url('/main/high-risk.png')] object-contain h-32 w-full" />
     </div>
   );
 }

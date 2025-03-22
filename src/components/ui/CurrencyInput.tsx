@@ -1,8 +1,8 @@
 import { useState, forwardRef } from 'react';
 
 const currencies = [
-  { id: 'usdc', name: 'USDC', icon: '/usdc.svg' },
-  { id: 'usdt', name: 'USDT', icon: '/usdt.svg' },
+  { id: 'usdc', name: 'USDC', icon: '/icons/usdc.svg' },
+  { id: 'usdt', name: 'USDT', icon: '/icons/usdt.svg' },
 ];
 
 interface Props {
