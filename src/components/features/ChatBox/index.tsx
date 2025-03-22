@@ -44,42 +44,46 @@ export default function ChatBox() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // 使用自定義樣式來適應聊天界面
+  // 更新自定義樣式以匹配截圖 - 移除標題背景色
   const customStyles = {
-    container: 'bg-[#4169E1] max-h-[80vh]',
-    content: 'flex flex-col h-[calc(80vh-80px)] overflow-hidden',
+    container: 'bg-[#4685f5] max-h-[80vh]', // 調整整體背景色以匹配截圖
+    header:
+      'bg-transparent text-white [text-shadow:2px_2px_0px_#000000cc] [-webkit-text-stroke:1px_#000000] border-b-0', // 移除背景色
+    content: 'flex flex-col p-4',
   };
 
   return (
     <Modal
       isVisible={isVisible}
       onClose={closePopup}
-      title="AI Assistant"
-      icon="🐻"
+      title="AI STRATEGIST"
+      icon=""
       showBackButton={true}
       onBack={() => openPopup('strategy')}
       customStyles={customStyles}>
-      <div className="flex flex-col items-center px-4 flex-1 overflow-hidden">
-        {/* Bear Icon */}
-        <img src="/chatbox/bear.svg" className="h-20" />
-
+      <div className="flex flex-col items-center w-full">
         {messages.length === 0 ? (
           <>
-            {/* Title */}
-            <h1 className="text-center text-white mb-6">
-              Ask me anything about this strategy, <br /> or tap on a question
-              below to get started.
+            {/* Bear Icon - 更新為圓形白色邊框 */}
+            <div className="w-32 h-32 rounded-full bg-[#e87eab] flex items-center justify-center mb-10 mt-8 border-[6px] border-white overflow-hidden">
+              <img src="/chatbox/bear.svg" className="h-24" alt="Bear AI" />
+            </div>
+
+            {/* Title - 增加文字陰影效果 */}
+            <h1 className="text-center text-white text-2xl mb-10 font-bold [text-shadow:2px_2px_0px_#000000] [-webkit-text-stroke:1px_#000000]">
+              Ask me anything about this strategy, or tap on a<br />
+              question below to get started.
             </h1>
 
-            {/* Question Buttons */}
-            <div className="grid grid-cols-4 gap-4 w-full max-w-lg">
+            {/* Question Buttons - 調整為更接近截圖的樣式 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-4xl mb-8 px-8">
               <button
-                className="bg-blue-400 p-2 rounded-lg text-xs text-white"
+                className="bg-[#366be3] hover:bg-blue-700 py-4 px-5 rounded-lg text-white text-left shadow-md border border-blue-400 text-lg"
                 onClick={() => setInputText("How does Morpho's lending work?")}>
                 How does Morpho&apos;s lending work?
               </button>
               <button
-                className="bg-blue-400 p-2 rounded-lg text-xs text-white"
+                className="bg-[#366be3] hover:bg-blue-700 py-4 px-5 rounded-lg text-white text-left shadow-md border border-blue-400 text-lg"
                 onClick={() =>
                   setInputText(
                     'What makes the Gauntlet WETH Prime Vault different?',
@@ -88,14 +92,14 @@ export default function ChatBox() {
                 What makes the Gauntlet WETH Prime Vault different?
               </button>
               <button
-                className="bg-blue-400 p-2 rounded-lg text-xs text-white"
+                className="bg-[#366be3] hover:bg-blue-700 py-4 px-5 rounded-lg text-white text-left shadow-md border border-blue-400 text-lg"
                 onClick={() =>
                   setInputText('How is the 3.72% APY calculated?')
                 }>
                 How is the 3.72% APY calculated?
               </button>
               <button
-                className="bg-blue-400 p-2 rounded-lg text-xs text-white"
+                className="bg-[#366be3] hover:bg-blue-700 py-4 px-5 rounded-lg text-white text-left shadow-md border border-blue-400 text-lg"
                 onClick={() =>
                   setInputText('What risks should I be aware of?')
                 }>
@@ -105,7 +109,7 @@ export default function ChatBox() {
           </>
         ) : (
           // Messages container
-          <div className="w-full overflow-y-auto flex-1 mb-4">
+          <div className="w-full overflow-y-auto flex-1 mb-4 px-4">
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -124,35 +128,25 @@ export default function ChatBox() {
           </div>
         )}
 
-        {/* Input area */}
-        <div className="w-full flex items-center bg-blue-600 rounded-full p-2">
-          <input
-            type="text"
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') handleSendMessage();
-            }}
-            placeholder="Type your question here..."
-            className="flex-1 bg-transparent border-none outline-none text-white placeholder-blue-200 px-4"
-          />
-          <button
-            onClick={handleSendMessage}
-            className="ml-2 bg-white text-blue-500 rounded-full p-2 w-10 h-10 flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="w-5 h-5">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-              />
-            </svg>
-          </button>
+        {/* Input area - 底部輸入框樣式優化 */}
+        <div className="w-full px-4 mt-auto">
+          <div className="w-full flex items-center bg-[#2d3342] rounded-full p-2 shadow-inner">
+            <input
+              type="text"
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter') handleSendMessage();
+              }}
+              placeholder="Ask anything..."
+              className="flex-1 bg-transparent border-none outline-none text-white placeholder-gray-400 px-4"
+            />
+            <button
+              onClick={handleSendMessage}
+              className="ml-2 text-white rounded-full p-2 w-12 h-12 flex items-center justify-center shadow-lg hover:bg-blue-700">
+              <img src="/chatbox/send.svg" alt="Send" className="w-20 h-20" />
+            </button>
+          </div>
         </div>
       </div>
     </Modal>
