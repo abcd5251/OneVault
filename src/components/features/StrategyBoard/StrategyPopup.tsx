@@ -3,26 +3,26 @@ import { ToastContainer } from 'react-toastify';
 
 import Morpho from '../Morpho';
 import Execution from './Execution';
+import { usePopup } from '@/contexts/PopupContext';
 
-interface StrategyPopupProps {
-  isOpen: boolean;
-  setChatBox: (show: boolean) => void;
-  setShowPopup: (show: boolean) => void;
-}
-
-export default function StrategyPopup({
-  isOpen,
-  setChatBox,
-  setShowPopup,
-}: StrategyPopupProps) {
+export default function StrategyPopup() {
   const [showDepositForm, setShowDepositForm] = useState(false);
 
+  // 完全使用 Context
+  const { state, openPopup, closePopup } = usePopup();
+
+  // 只使用 Context 的顯示狀態
+  const isVisible = state.activePopup === 'strategy';
+
   const handleChatBox = () => {
-    setChatBox(true);
-    setShowPopup(false);
+    openPopup('chat');
   };
 
-  if (!isOpen) return null;
+  const handleClose = () => {
+    closePopup();
+  };
+
+  if (!isVisible) return null;
 
   return (
     <>
@@ -50,7 +50,7 @@ export default function StrategyPopup({
             <img
               src="/morpho/cancel.svg"
               className="h-10 absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer"
-              onClick={() => setShowPopup(false)}
+              onClick={handleClose}
             />
           </div>
 

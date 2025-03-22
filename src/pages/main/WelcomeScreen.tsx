@@ -1,5 +1,5 @@
 import { useState, Dispatch, SetStateAction } from 'react';
-import OnboardingModal from '../../components/OnboardingModal';
+import OnboardingModal from '@/components/features/OnboardingModal';
 
 interface Props {
   setIsDeposited: Dispatch<SetStateAction<boolean>>;

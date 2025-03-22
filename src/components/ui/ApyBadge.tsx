@@ -1,6 +1,4 @@
-import React from 'react';
-
-function APY() {
+function ApyBadge() {
   return (
     <div className="flex items-center">
       <img
@@ -33,4 +31,4 @@ function APY() {
   );
 }
 
-export default APY;
+export default ApyBadge;

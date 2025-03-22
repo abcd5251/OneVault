@@ -6,6 +6,7 @@ import Layout from './layout';
 import { config } from './config';
 import { Routes, Route } from 'react-router';
 import { Group } from './pages/dev';
+import { PopupProvider } from './contexts/PopupContext';
 
 const queryClient = new QueryClient();
 
@@ -14,10 +15,12 @@ export default function App() {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <Routes>
-            <Route path="/" element={<Layout />} />
-            <Route path="/dev" element={<Group />} />
-          </Routes>
+          <PopupProvider>
+            <Routes>
+              <Route path="/" element={<Layout />} />
+              <Route path="/dev" element={<Group />} />
+            </Routes>
+          </PopupProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

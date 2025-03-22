@@ -14,14 +14,14 @@ import {
   USDC_DECIMAL,
   PERMIT_EXPIRY,
   TYPES,
-} from '../../helpers/constants';
-import CurrencyInput from '../ui/CurrencyInput';
-import { config } from '../../config';
-import { usdcAbi } from '../../abis/usdc';
-import { execution } from '../../helpers/mock-backend';
-import { createMorphoCall } from '../../helpers/strategy';
-import { serializeAmount } from '../../helpers/utils';
-import APY from '../Morpho/Apy';
+} from '@/helpers/constants';
+import CurrencyInput from '@/components/ui/CurrencyInput';
+import { config } from '@/config';
+import { usdcAbi } from '@/abis/usdc';
+import { execution } from '@/helpers/mock-backend';
+import { createMorphoCall } from '@/helpers/strategy';
+import { serializeAmount } from '@/helpers/utils';
+import APY from '@/components/ui/ApyBadge';
 
 interface DepositFormData {
   deposit: {

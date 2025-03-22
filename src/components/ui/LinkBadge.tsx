@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
 
-function LinkComponent() {
+function LinkBadge() {
   return (
     <div className="flex items-center mb-5">
       <div className="flex items-center">
@@ -22,4 +22,4 @@ function LinkComponent() {
   );
 }
 
-export default LinkComponent;
+export default LinkBadge;

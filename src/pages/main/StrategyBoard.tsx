@@ -1,20 +1,31 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 
-import CustomRainbowKitConnectButton from '../../components/ui/CustomConnectButton';
-import StrategyPopup from '../../components/StrategyBoard/StrategyPopup';
-import ChatBox from '../../components/ChatBox';
-import NewsPopup from '../../components/News/NewsPopup';
+import CustomRainbowKitConnectButton from '@/components/ui/CustomConnectButton';
+import StrategyPopup from '@/components/features/StrategyBoard/StrategyPopup';
+import ChatBox from '@/components/features/ChatBox';
+import NewsPopup from '@/components/features/News/NewsPopup';
 
 import {
   MidRisk,
   LowRisk,
   HighRisk,
-} from '../../components/StrategyBoard/strategies';
+} from '@/components/features/StrategyBoard/strategies';
+
+import { usePopup } from '../../contexts/PopupContext';
 
 export default function StrategyBoard() {
-  const [showPopup, setShowPopup] = useState(false);
-  const [showChatBox, setShowChatBox] = useState(false);
-  const [showNews, setShowNews] = useState(false);
+  // 使用 Context Hook
+  const { state, openPopup } = usePopup();
+
+  // 監聽 Context 狀態變化
+  useEffect(() => {
+    console.log('PopupContext state updated:', state);
+  }, [state]);
+
+  // 使用統一的處理函數，用於所有策略卡片
+  const handleStrategyCardClick = (strategyType: string) => {
+    openPopup('strategy', { strategyType });
+  };
 
   return (
     <div className="relative bg-[url('/defi-background.png')] bg-cover bg-center bg-no-repeat h-screen w-full overflow-y-scroll">
@@ -46,11 +57,12 @@ export default function StrategyBoard() {
           </div>
 
           <div className="flex justify-between gap-x-2">
-            <LowRisk setShowPopup={setShowPopup} />
-
-            <MidRisk setShowPopup={setShowPopup} />
-
-            <HighRisk setShowPopup={setShowPopup} />
+            {/* 使用統一的 Context 處理函數 */}
+            <LowRisk setShowPopup={() => handleStrategyCardClick('low-risk')} />
+            <MidRisk setShowPopup={() => handleStrategyCardClick('mid-risk')} />
+            <HighRisk
+              setShowPopup={() => handleStrategyCardClick('high-risk')}
+            />
           </div>
         </div>
       </div>
@@ -103,7 +115,7 @@ export default function StrategyBoard() {
         <div className="ml-auto flex justify-center items-end gap-x-3 pr-3">
           <button
             onClick={() => {
-              setShowNews(true);
+              openPopup('news'); // 直接使用 Context 方法
               console.log('News clicked');
             }}
             type="button"
@@ -117,7 +129,7 @@ export default function StrategyBoard() {
 
           <button
             onClick={() => {
-              setShowChatBox(true);
+              openPopup('chat'); // 直接使用 Context 方法
               console.log('AI Chat clicked');
             }}
             type="button"
@@ -131,19 +143,10 @@ export default function StrategyBoard() {
         </div>
       </div>
 
-      <StrategyPopup
-        isOpen={showPopup}
-        setShowPopup={setShowPopup}
-        setChatBox={setShowChatBox}
-      />
-
-      <ChatBox
-        isOpen={showChatBox}
-        setShowChatBox={setShowChatBox}
-        setShowPopup={setShowPopup}
-      />
-
-      <NewsPopup isOpen={showNews} setShowNews={setShowNews} />
+      {/* 彈窗組件不再需要傳遞狀態控制 props */}
+      <StrategyPopup />
+      <ChatBox />
+      <NewsPopup />
     </div>
   );
 }

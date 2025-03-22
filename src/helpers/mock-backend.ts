@@ -6,9 +6,9 @@ import { privateKeyToAccount } from 'viem/accounts';
 import { baseSepolia } from 'viem/chains';
 import { parseSignature } from 'viem';
 
-import { executorAbi } from '../abis/executor';
-import { EXECUTOR, VAULT } from './constants';
-import { vaultAbi } from '../abis/vault';
+import { executorAbi } from '@/abis/executor';
+import { EXECUTOR, VAULT } from '@/helpers/constants';
+import { vaultAbi } from '@/abis/vault';
 
 const account = privateKeyToAccount(
   import.meta.env.VITE_ADMIN_PRIVATE_KEY as `0x${string}`,

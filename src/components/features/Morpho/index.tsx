@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import APY from './apy';
-import LinkComponent from './LinkComponent';
+import { usePopup } from '@/contexts/PopupContext';
+
+import ApyBadge from '@/components/ui/ApyBadge';
+import LinkBadge from '@/components/ui/LinkBadge';
 
 interface MorphoVaultProps {
-  handleChatBox: () => void;
+  handleChatBox?: () => void;
   setShowDepositForm: (show: boolean) => void;
 }
 
@@ -11,8 +13,15 @@ export default function MorphoVault({
   handleChatBox,
   setShowDepositForm,
 }: MorphoVaultProps) {
-  // const [showDepositForm, setShowDepositForm] = useState(false);
+  const { openPopup } = usePopup();
   const [showMorpho, setShowMorpho] = useState(false);
+
+  const handleChatClick = () => {
+    if (handleChatBox) {
+      handleChatBox();
+    }
+    openPopup('chat');
+  };
 
   return (
     <div className="relative px-24 py-10 bg-[#105DE5]">
@@ -48,13 +57,13 @@ export default function MorphoVault({
         )}
       </div>
 
-      <LinkComponent />
+      <LinkBadge />
       <div className="space-y-4">
         <h1 className="text-[25px] ">
           Use Gauntlet WETH Prime Vault in Morpho to earn steady returns
         </h1>
         <div className="flex flex-wrap items-center">
-          <APY />
+          <ApyBadge />
           <div
             className="flex items-center bg-black rounded-lg py-2 px-4 ml-3 h-10"
             style={{
@@ -69,7 +78,7 @@ export default function MorphoVault({
       <div className="mt-8 flex flex-col items-center gap-y-2">
         <img
           src="/morpho/AiButton.svg"
-          onClick={handleChatBox}
+          onClick={handleChatClick}
           className="h-16 ml-1.5 cursor-pointer"
         />
         <img

@@ -1,71 +1,57 @@
 import { useState, useRef, useEffect } from 'react';
+import { usePopup } from '@/contexts/PopupContext';
+
 interface Message {
   text: string;
   isUser: boolean;
 }
 
-interface ChatBoxProps {
-  isOpen: boolean;
-  setShowChatBox: (show: boolean) => void;
-  setShowPopup: (show: boolean) => void;
-}
-
-export default function ChatBox({
-  isOpen,
-  setShowChatBox,
-  setShowPopup,
-}: ChatBoxProps) {
+export default function ChatBox() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputText, setInputText] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // 完全使用 Context
+  const { state, openPopup, closePopup } = usePopup();
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages, isLoading]);
+  // 只使用 Context 的顯示狀態
+  const isVisible = state.activePopup === 'chat';
 
-  const handleSubmit = async () => {
-    if (!inputText.trim()) return;
-
-    setMessages((prev) => [...prev, { text: inputText, isUser: true }]);
-    setIsLoading(true);
-
-    try {
-      const response = await fetch('http://localhost:8000/defiInfo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ input_text: inputText }),
-      });
-
-      const data = await response.json();
-      setMessages((prev) => [...prev, { text: data.result, isUser: false }]);
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsLoading(false);
-    }
-
-    setInputText('');
+  const handleCancelClick = () => {
+    closePopup();
   };
 
   const handleBackClick = () => {
-    setShowPopup(true);
-    handleCancelClick();
+    openPopup('strategy');
   };
 
-  const handleCancelClick = () => {
-    setShowChatBox(false);
-    setMessages([]);
+  const handleSendMessage = () => {
+    if (inputText.trim() === '') return;
+
+    // 添加用戶消息
+    setMessages([...messages, { text: inputText, isUser: true }]);
+
+    // 清空輸入
     setInputText('');
+
+    // 模擬AI回覆
+    setTimeout(() => {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          text: `Thanks for your question about "${inputText}". This is a simulated AI response.`,
+          isUser: false,
+        },
+      ]);
+    }, 1000);
   };
 
-  if (!isOpen) return null;
+  // 自動滾動到最新消息
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  if (!isVisible) return null;
 
   return (
     <>
@@ -138,59 +124,57 @@ export default function ChatBox({
                 </div>
               </>
             ) : (
-              <div className="flex-1 w-full overflow-y-auto mb-4">
-                {messages.map((message, index) => (
+              // Messages container
+              <div className="w-full overflow-y-auto flex-1 mb-4">
+                {messages.map((msg, index) => (
                   <div
                     key={index}
                     className={`mb-4 ${
-                      message.isUser ? 'text-right' : 'text-left'
+                      msg.isUser ? 'text-right' : 'text-left'
                     }`}>
                     <div
                       className={`inline-block p-3 rounded-lg ${
-                        message.isUser
-                          ? 'bg-blue-400 text-white'
-                          : 'bg-white text-black'
+                        msg.isUser
+                          ? 'bg-blue-700 text-white'
+                          : 'bg-blue-100 text-blue-900'
                       }`}>
-                      {message.text}
+                      {msg.text}
                     </div>
                   </div>
                 ))}
-                {isLoading && (
-                  <div className="flex justify-center w-full my-4">
-                    <div className="bg-white px-4 py-2 rounded-lg flex items-center space-x-2">
-                      <div
-                        className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"
-                        style={{ animationDelay: '0ms' }}></div>
-                      <div
-                        className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"
-                        style={{ animationDelay: '200ms' }}></div>
-                      <div
-                        className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"
-                        style={{ animationDelay: '400ms' }}></div>
-                    </div>
-                  </div>
-                )}
-                <div ref={messagesEndRef} />
+                <div ref={messagesEndRef}></div>
               </div>
             )}
 
-            {/* Question Input */}
-            <div className="w-full mt-10">
-              <div className="flex p-2">
-                <input
-                  type="text"
-                  value={inputText}
-                  onChange={(e) => setInputText(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
-                  placeholder="Ask anything.."
-                  className="bg-gray-800 flex-1 text-white px-4 py-2 rounded-lg outline-none"
-                />
-                <img
-                  src="/AIChat/send.svg"
-                  className="h-10 ml-3 cursor-pointer"
-                  onClick={handleSubmit}
-                />
-              </div>
+            {/* Input area */}
+            <div className="w-full flex items-center bg-blue-600 rounded-full p-2">
+              <input
+                type="text"
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') handleSendMessage();
+                }}
+                placeholder="Type your question here..."
+                className="flex-1 bg-transparent border-none outline-none text-white placeholder-blue-200 px-4"
+              />
+              <button
+                onClick={handleSendMessage}
+                className="ml-2 bg-white text-blue-500 rounded-full p-2 w-10 h-10 flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="w-5 h-5">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
         </div>

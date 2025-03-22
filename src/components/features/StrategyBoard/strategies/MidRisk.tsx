@@ -1,7 +1,3 @@
-import React, { useState } from 'react';
-
-import StrategyPopup from '../StrategyBoard/StrategyPopup';
-
 // interface MidRiskProps {
 //   setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
 // }

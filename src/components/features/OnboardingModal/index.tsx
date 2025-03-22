@@ -17,19 +17,19 @@ import {
 } from '@wagmi/core';
 import { ToastContainer, toast } from 'react-toastify';
 
-import CustomRainbowKitConnectButton from '../ui/CustomConnectButton';
-import CurrencyInput from '../ui/CurrencyInput';
-import { usdcAbi } from '../../abis/usdc';
-import { config } from '../../config';
+import CustomRainbowKitConnectButton from '@/components/ui/CustomConnectButton';
+import CurrencyInput from '@/components/ui/CurrencyInput';
+import { usdcAbi } from '@/abis/usdc';
+import { config } from '@/config';
 import {
   USDC,
   VAULT,
   USDC_DECIMAL,
   PERMIT_EXPIRY,
   TYPES,
-} from '../../helpers/constants';
-import { serializeAmount } from '../../helpers/utils';
-import { deposit } from '../../helpers/mock-backend';
+} from '@/helpers/constants';
+import { serializeAmount } from '@/helpers/utils';
+import { deposit } from '@/helpers/mock-backend';
 
 interface DepositFormData {
   deposit: {

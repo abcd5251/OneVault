@@ -4,15 +4,15 @@ import { readContract } from '@wagmi/core';
 
 import type { Call } from './mock-backend';
 
-import { usdcAbi } from '../abis/usdc';
+import { usdcAbi } from '@/abis/usdc';
 import {
   EXECUTOR,
   MORPHO_BLUE,
   MORPHO_WETH_USDC_MARKET,
   USDC,
-} from './constants';
-import { morphoAbi } from '../abis/morpho';
-import { config } from '../config';
+} from '@/helpers/constants';
+import { morphoAbi } from '@/abis/morpho';
+import { config } from '@/config';
 
 export async function createMorphoCall(
   user: Address,
