@@ -1,4 +1,4 @@
-function ApyBadge() {
+function ApyBadge({ apy }: { apy: string }) {
   return (
     <div className="flex items-center">
       <img
@@ -24,7 +24,7 @@ function ApyBadge() {
             letterSpacing: '1%',
           }}
           className="text-[25px] text-[#C689FF]">
-          3.72%
+          {apy}
         </span>
       </div>
     </div>

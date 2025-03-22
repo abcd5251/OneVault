@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
 import CustomRainbowKitConnectButton from '@/components/ui/CustomConnectButton';
-import StrategyPopup from '@/components/features/StrategyBoard/StrategyPopup';
+
 import ChatBox from '@/components/features/ChatBox';
 import NewsPopup from '@/components/features/News/NewsPopup';
+import StrategyPopup from '@/components/features/StrategyBoard/StrategyPopup';
 
 import {
   MidRisk,
@@ -143,7 +144,7 @@ export default function StrategyBoard() {
         </div>
       </div>
 
-      {/* 彈窗組件不再需要傳遞狀態控制 props */}
+      {/* 所有彈窗 */}
       <StrategyPopup />
       <ChatBox />
       <NewsPopup />
