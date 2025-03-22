@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { useModal } from '@/contexts/ModalContext';
 import ApyBadge from '@/components/ui/ApyBadge';
 import LinkBadge from '@/components/ui/LinkBadge';
 import CurrencyInput from '@/components/ui/CurrencyInput';
-import { STRATEGY_CONFIG } from '@/constants';
 import { StrategyType, ModalType } from '@/types';
+import { STRATEGY_CONFIG } from '@/constants';
+import { getStrategyExecutor } from '@/services/strategyExecutionService';
 
 type StrategyContentProps = {
   strategyType?: StrategyType;
@@ -19,10 +21,59 @@ export default function StrategyContent({
   setShowDepositForm,
 }: StrategyContentProps) {
   const [showMorpho, setShowMorpho] = useState(false);
+  const [amount, setAmount] = useState(0);
+  const [isExecuting, setIsExecuting] = useState(false);
   const { openModal } = useModal();
 
   const config =
     STRATEGY_CONFIG[strategyType] || STRATEGY_CONFIG[StrategyType.LOW_RISK];
+
+  const executor = getStrategyExecutor(strategyType);
+
+  const handleExecuteStrategy = async () => {
+    if (!amount || amount <= 0) {
+      toast.error('請輸入有效金額');
+      return;
+    }
+
+    setIsExecuting(true);
+
+    try {
+      const isValid = await executor.validate(amount);
+      if (!isValid) {
+        toast.error('金額驗證失敗，請檢查輸入');
+        setIsExecuting(false);
+        return;
+      }
+
+      if (strategyType === StrategyType.HIGH_RISK) {
+        const confirmed = window.confirm(
+          '警告：這是高風險策略，可能導致較大資金損失。確定要繼續嗎？',
+        );
+        if (!confirmed) {
+          setIsExecuting(false);
+          return;
+        }
+      }
+
+      const result = await executor.execute(amount);
+
+      if (result.success) {
+        toast.success(result.message || '策略執行成功');
+      } else {
+        toast.error(result.message || '策略執行失敗');
+      }
+    } catch (error) {
+      console.error('執行策略時發生錯誤:', error);
+      toast.error('執行過程中發生錯誤');
+    } finally {
+      setIsExecuting(false);
+    }
+  };
+
+  const handleAmountChange = (value: number) => {
+    setAmount(value);
+  };
 
   return (
     <div className={`relative px-24 py-10 ${config.backgroundColor}`}>
@@ -132,7 +183,7 @@ export default function StrategyContent({
                 Amount to deploy
               </div>
               <div className="relative flex items-center">
-                <CurrencyInput />
+                <CurrencyInput onChange={handleAmountChange} />
               </div>
             </div>
 
@@ -142,10 +193,9 @@ export default function StrategyContent({
               No extra steps—just sit back and let the AI optimize for you
             </p>
 
-            {/* 執行按鈕 */}
+            {/* 執行按鈕 - 整合執行服務 */}
             <div className="flex justify-center mb-4">
               <div className="relative">
-                {/* Shadow effect - darker blue parallelogram beneath */}
                 <div
                   className="absolute inset-0 bg-blue-900"
                   style={{
@@ -155,12 +205,17 @@ export default function StrategyContent({
                     zIndex: -1,
                   }}></div>
 
-                {/* Main button - blue parallelogram */}
                 <img
                   src="/common/confirm.png"
-                  onClick={() => console.log('execute')}
-                  className="mt-10 h-16 cursor-pointer"
+                  onClick={handleExecuteStrategy}
+                  className={`mt-10 h-16 cursor-pointer ${isExecuting ? 'opacity-50' : ''}`}
                 />
+
+                {isExecuting && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-white"></div>
+                  </div>
+                )}
               </div>
             </div>
           </section>

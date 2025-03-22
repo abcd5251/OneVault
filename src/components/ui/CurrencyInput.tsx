@@ -6,7 +6,7 @@ const currencies = [
 ];
 
 interface Props {
-  onChange?: (value: { currency: string; amount: string }) => void;
+  onChange?: (value: number) => void;
   value?: { currency: string; amount: string };
   name?: string;
 }
@@ -19,12 +19,12 @@ const CurrencyInput = forwardRef<HTMLInputElement, Props>(
 
     const handleAmountChange = (inputValue: string) => {
       setAmount(inputValue);
-      onChange?.({ currency: selectedCurrency.id, amount: inputValue });
+      const numericValue = parseFloat(inputValue) || 0;
+      onChange?.(numericValue);
     };
 
     const handleCurrencyChange = (currency: (typeof currencies)[0]) => {
       setSelectedCurrency(currency);
-      onChange?.({ currency: currency.id, amount });
       setIsOpen(false);
     };
 
