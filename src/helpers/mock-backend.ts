@@ -7,7 +7,7 @@ import { baseSepolia } from 'viem/chains';
 import { parseSignature } from 'viem';
 
 import { executorAbi } from '@/abis/executor';
-import { EXECUTOR, VAULT } from '@/helpers/constants';
+import { EXECUTOR, VAULT } from '@/constants/contracts';
 import { vaultAbi } from '@/abis/vault';
 
 const account = privateKeyToAccount(

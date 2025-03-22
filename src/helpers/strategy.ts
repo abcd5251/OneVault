@@ -10,7 +10,7 @@ import {
   MORPHO_BLUE,
   MORPHO_WETH_USDC_MARKET,
   USDC,
-} from '@/helpers/constants';
+} from '@/constants/contracts';
 import { morphoAbi } from '@/abis/morpho';
 import { config } from '@/config';
 

@@ -1,31 +1,15 @@
 import { useState } from 'react';
+
 import { useModal } from '@/contexts/ModalContext';
 import ApyBadge from '@/components/ui/ApyBadge';
 import LinkBadge from '@/components/ui/LinkBadge';
 import CurrencyInput from '@/components/ui/CurrencyInput';
+import { STRATEGY_CONFIG } from '@/constants';
 
 type StrategyContentProps = {
   strategyType?: string;
   showDepositForm: boolean;
   setShowDepositForm: (show: boolean) => void;
-};
-
-type StrategyConfig = {
-  text: {
-    icon: string;
-    title: string;
-    description: string;
-    apy: string;
-  };
-  risk: {
-    label: string;
-    color: string;
-  };
-  backgroundColor: string;
-  images: {
-    banner: string;
-    hint: string;
-  };
 };
 
 export default function StrategyContent({
@@ -36,64 +20,7 @@ export default function StrategyContent({
   const [showMorpho, setShowMorpho] = useState(false);
   const { openModal } = useModal();
 
-  // 基於策略類型的配置
-  const strategyConfig: Record<string, StrategyConfig> = {
-    'low-risk': {
-      text: {
-        icon: '🛡️',
-        title: 'Use Gauntlet WETH Prime Vault in Morpho to earn steady returns',
-        description: 'Low Risk Strategy',
-        apy: '3.72%',
-      },
-      risk: {
-        label: 'Low Risk',
-        color: 'text-[#33FF6C]',
-      },
-      backgroundColor: 'bg-[#105DE5]',
-      images: {
-        banner: '/morpho/banner.svg',
-        hint: '/morpho/hint.svg',
-      },
-    },
-    'mid-risk': {
-      text: {
-        icon: '⚖️',
-        title:
-          'Use Balanced Yield Strategy to optimize returns with moderate risk',
-        description: 'Balanced Strategy',
-        apy: '3.72%',
-      },
-      risk: {
-        label: 'Mid Risk',
-        color: 'text-[#9C3EF4]',
-      },
-      backgroundColor: 'bg-[#105DE5]',
-      images: {
-        banner: '/morpho/banner.svg',
-        hint: '/morpho/hint.svg',
-      },
-    },
-    'high-risk': {
-      text: {
-        icon: '🚀',
-        title:
-          'Sonic-native concentrated liquidity exchange. The ultimate trading hub on Sonic.',
-        description: 'Shadow Strategy',
-        apy: '134.9',
-      },
-      risk: {
-        label: 'High Risk',
-        color: 'text-[#E53B52]',
-      },
-      backgroundColor: 'bg-[#105DE5]',
-      images: {
-        banner: '/sonic/banner.svg',
-        hint: '/sonic/hint.svg',
-      },
-    },
-  };
-
-  const config = strategyConfig[strategyType] || strategyConfig['low-risk'];
+  const config = STRATEGY_CONFIG[strategyType] || STRATEGY_CONFIG['low-risk'];
 
   return (
     <div className={`relative px-24 py-10 ${config.backgroundColor}`}>

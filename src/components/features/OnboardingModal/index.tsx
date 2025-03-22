@@ -27,7 +27,7 @@ import {
   USDC_DECIMAL,
   PERMIT_EXPIRY,
   TYPES,
-} from '@/helpers/constants';
+} from '@/helpers/contracts';
 import { serializeAmount } from '@/helpers/utils';
 import { deposit } from '@/helpers/mock-backend';
 

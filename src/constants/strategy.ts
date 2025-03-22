@@ -37,8 +37,8 @@ export const STRATEGY_CONFIG: Record<StrategyType, StrategyConfig> = {
     },
     backgroundColor: 'bg-[#105DE5]',
     images: {
-      banner: '/morpho/Morpho.svg',
-      hint: '/morpho/morphoShow.svg',
+      banner: '/morpho/banner.svg',
+      hint: '/morpho/hint.svg',
     },
   },
   [StrategyType.MID_RISK]: {
@@ -55,8 +55,8 @@ export const STRATEGY_CONFIG: Record<StrategyType, StrategyConfig> = {
     },
     backgroundColor: 'bg-[#105DE5]',
     images: {
-      banner: '/morpho/Morpho.svg',
-      hint: '/morpho/morphoShow.svg',
+      banner: '/morpho/banner.svg',
+      hint: '/morpho/hint.svg',
     },
   },
   [StrategyType.HIGH_RISK]: {
